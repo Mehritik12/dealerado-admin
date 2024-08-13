@@ -1,0 +1,187 @@
+button.btn.btn-primary {
+  background: #B52628;
+  border-radius: 12px;
+  &:hover,
+  &:hover:not(.btn-active) {
+    background: #eb3b3e !important;
+  }
+}
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  border-color: rgba(47, 111, 237, 1);
+  background-image: url("../_metronic/assets/images/tick.svg");
+}
+.btn.btn-primary {
+  &:active {
+    &:not(.btn-active) {
+      background: #eb3b3e !important;
+      color: #fff !important;
+    }
+  }
+}
+.header {
+  .header-brand {
+    background: rgba(255, 255, 255, 1);
+    .logo_img {
+      filter: none;
+    }
+  }
+}
+.aside {
+  background: #B52628;
+  .aside-toolbar {
+    .aside-user {
+      border-top: 1px solid rgba(225, 230, 239, 1);
+    }
+  }
+}
+.aside-menu {
+  .menu {
+    .menu-item {
+      margin: 4px 0;
+      .menu-link.active {
+        background-color: rgba(240, 245, 255, 1);
+        color: #eb3b3e;
+        .menu-icon {
+          color: #eb3b3e;
+          svg, path {
+            color: #eb3b3e;
+            fill: #eb3b3e;
+          }
+          .svg-icon,
+          i {
+            color: #eb3b3e;
+          }
+        }
+        span.menu-title {
+          color: #eb3b3e;
+        }
+      }
+      .menu-link {
+        .menu-title,.menu-icon, i{
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+      &:not(.here) {
+        .menu-link:hover:not(.disabled):not(.active):not(.here) {
+          color: #000000 ;
+          background-color: rgba(240, 245, 255, 1);
+          .menu-icon,
+          i,
+          .menu-title {
+            color: #000000 !important;
+          }
+        }
+      }
+    }
+  }
+}
+.table:not(.table-bordered) {
+  tr,
+  th,
+  td {
+    &:first-child {
+      padding-left: 1.25rem;
+    }
+  }
+}
+table.dataTable {
+  thead {
+    border: 1px solid rgba(241, 243, 249, 1);
+    background: rgba(248, 249, 252, 1);
+    th {
+      color: rgba(29, 36, 51, 0.65);
+      font-weight: 500 !important;
+      white-space: nowrap;
+    }
+  }
+  .verifiedOptions.dropdown {
+    .dropdown-menu {
+      padding: 8px;
+    }
+  }
+}
+.card-title {
+  input.form-control {
+    border: 1px solid rgba(225, 230, 239, 1);
+    background: rgba(248, 249, 252, 1);
+  }
+}
+.verifiedOptions {
+  a.menu-link {
+    white-space: nowrap;
+    color: rgb(47, 111, 237) !important;
+    background-color: rgb(240, 245, 255) !important;
+  }
+}
+
+.scrolltop {
+  background-color: rgb(47, 111, 237);
+  &:hover {
+    background-color: rgb(47, 111, 237);
+  }
+}
+.card {
+  border: 1px solid rgba(225, 230, 239, 1);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
+}
+.modal {
+  .image-upload {
+    label.btn.btn-primary {
+      background: rgba(47, 111, 237, 1);
+      box-shadow: 0px -2px 2px 0px rgba(0, 0, 0, 0.15) inset;
+      border-radius: 12px;
+      padding: 8px 16px;
+    }
+  }
+  button.primaryBtn.btn.btn-secondary {
+    background-color: transparent !important;
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+  button.btn.btn-primary {
+    border-radius: 14px;
+  }
+  button.primaryBtn.active.btn.btn-primary {
+    background:#B52628 !important;
+  }
+}
+.chip {
+  background: rgb(47, 111, 237) !important;
+}
+.dropzone {
+  border: 1px dashed rgb(47, 111, 237) !important;
+  background: rgb(240, 245, 255) !important;
+}
+input.form-control,
+select.form-select,
+.searchWrapper,
+textarea.form-control {
+  border-radius: 12px !important;
+}
+
+.error {
+    color: rgba(224, 45, 60, 1) !important;
+}
+label.form-label {
+    span {
+        color: rgba(224, 45, 60, 1);
+    }
+}
+.table.gy-5 {
+    tr {
+        td {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+    }
+}
+.menu.menu-sub.menu-sub-dropdown {
+    a.menu-link {
+        &:hover {
+            color: rgb(47, 111, 237) !important;
+            background-color: rgb(240, 245, 255) !important;
+        }
+    }
+}
