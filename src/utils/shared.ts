@@ -36,11 +36,8 @@ export const commonUserStatusSwtichCases = (id: any, values: any, dispatch: any)
         case 'Category':
             // dispatch(getCategory({ search: searchValue.trim() }))
             break;
-        case 'PARTNER':
+        case 'User':
             // dispatch(getParnters({ search: searchValue.trim() }))
-            break;
-        case 'USER':
-            // dispatch(getUsers({ search: searchValue.trim() }))
             break;
         default:
     }

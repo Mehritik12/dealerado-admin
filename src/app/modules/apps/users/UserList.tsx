@@ -1,0 +1,42 @@
+import { PartnersListHeader } from "../common/common-list/components/header/ListHeader";
+import { CommonTable } from "../common/common-list/table/Table";
+import { KTCard } from "../../../../_metronic/helpers";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategory } from "../../../../redux/features/category/_categoryAction";
+import { Pagination } from "../common/common-list/components/pagination/Pagination";
+import { setId } from "../../../../redux/features/shared/sharedSlice";
+import { UserModal } from "./UserModal";
+import { getUsers } from "../../../../redux/features/user/_userAction";
+import { usersColumns } from "../common/common-list/table/columns/_userColumns";
+
+const UserList = () => {
+  const dispatch: any = useDispatch();
+  const data: any = useSelector((state: any) => state.userList.data);
+  const { totalRecord } = useSelector((state: any) => state.userList);
+  const sharedActions = useSelector((state: any) => state.sharedActions);
+
+  useEffect(() => {
+    dispatch(setId('User'))
+    dispatch(getUsers({ page: 1, limit: 10 }));
+  }, [dispatch]);
+
+  const handleClick = (page: number) => {
+    dispatch(getUsers({ page: page, limit: 10 }));
+  };
+
+  return (
+    <>
+      <KTCard>
+        <PartnersListHeader />
+        <CommonTable data={data} columns={usersColumns} />
+        {sharedActions.userModal && <UserModal/>}
+        {totalRecord > 10 && (
+          <Pagination totalRecord={totalRecord} handleClick={handleClick} />
+        )}
+      </KTCard>
+    </>
+  );
+};
+
+export { UserList };

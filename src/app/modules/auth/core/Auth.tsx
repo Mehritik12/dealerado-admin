@@ -11,9 +11,8 @@ import {
 import { LayoutSplashScreen } from "../../../../_metronic/layout/core";
 import { AuthModel, UserModel } from "./_models";
 import * as authHelper from "./AuthHelpers";
-import { getUserByToken } from "./_requests";
 import { WithChildren } from "../../../../_metronic/helpers";
-// import { getUser } from "../../apps/partner/partner-list/core/_requests";
+import { getUserByToken } from "./_requests";
 
 type AuthContextProps = {
   auth: AuthModel | undefined;
@@ -70,12 +69,12 @@ const AuthInit: FC<WithChildren> = ({ children }) => {
   useEffect(() => {
     const requestUser = async (auth: any) => {
       try {
-             if (!didRequest.current) {
-          // const data:any = await getUser('/auth/'+auth?.userDetail?._id);
+        if (!didRequest.current) {
+          // const data:any = await getUserByToken();
           // if(data?.response?.status==403){
           //    logout();
           // }
-          if (auth && auth.accessToken          ) {
+          if (auth && auth.accessToken) {
             setCurrentUser(auth);
           }
         }
@@ -97,7 +96,6 @@ const AuthInit: FC<WithChildren> = ({ children }) => {
       logout();
       setShowSplashScreen(false);
     }
-    // eslint-disable-next-line
   }, []);
 
   return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>;

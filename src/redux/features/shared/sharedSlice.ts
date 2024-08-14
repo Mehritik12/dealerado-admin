@@ -4,6 +4,7 @@ const initialState: any = {
   id: '',
   showModal: false,
   categoryModal: false,
+  userModal: false,
   partnerDetailsModal: false,
   bannerModal: false,
   formDetails: {},
@@ -34,6 +35,9 @@ export const sharedSlice = createSlice({
     setPartnerModalStatus: (state, { payload }) => {
       state.partnerDetailsModal = payload
     },
+    setUserModalStatus: (state, { payload }) => {
+      state.userModal = payload;
+    },
     setFiles: (state, { payload }) => {
       state.files = payload.data
     },
@@ -48,6 +52,7 @@ export const {
   setModalStatus,
   setFormDetails,
   setCategoryModalStatus,
+  setUserModalStatus,
   setPartnerModalStatus,
   setFiles,
   setPartnerProfileImages,

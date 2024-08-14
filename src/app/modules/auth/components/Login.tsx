@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from "react";
 import * as Yup from "yup";
 import clsx from "clsx";
@@ -7,6 +6,8 @@ import { login } from "../core/_requests";
 import { useAuth } from "../core/Auth";
 import "./style.scss";
 import { notify } from "../../../../utils/shared";
+import { setupAxios } from "../core/AuthHelpers";
+import axios from "axios";
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Please enter a valid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
@@ -20,7 +21,7 @@ const initialValues = {
 export function Login() {
   const [loading, setLoading] = useState(false);
   const [newPassType, setNewPassType] = useState(true);
-  const { saveAuth, setCurrentUser } = useAuth();
+  const { saveAuth, setCurrentUser} = useAuth();
 
   const formik = useFormik({
     initialValues,
@@ -31,6 +32,7 @@ export function Login() {
         const { data: auth } = await login(values.email, values.password);
         saveAuth(auth?.data);
         setCurrentUser(auth["data"]);
+        setupAxios(axios);
         notify(auth.responseMessage, 'success');
       } catch (error: any) {
         console.log(error)
@@ -69,11 +71,11 @@ export function Login() {
           name="email"
           autoComplete="off"
         />
-        {/* {formik.touched.email && formik.errors.email && (
+        {formik.touched.email && formik.errors.email && (
           <div className="fv-plugins-message-container">
             <span role="alert">{formik.errors.email}</span>
           </div>
-        )} */}
+        )}
         {formik.touched.email && formik.errors.email && (
           <div className="fv-plugins-message-container">
             <div className="fv-help-block">
@@ -130,16 +132,7 @@ export function Login() {
       {/* begin::Wrapper */}
       <div className="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
         <div />
-
-        {/* begin::Link */}
-        {/* <Link to='/auth/forgot-password' className='link-primary'>
-          Forgot Password ?
-        </Link> */}
-        {/* end::Link */}
       </div>
-      {/* end::Wrapper */}
-
-      {/* begin::Action */}
       <div className="d-grid mb-10">
         <button
           type="submit"
@@ -156,14 +149,6 @@ export function Login() {
           )}
         </button>
       </div>
-      {/* end::Action */}
-
-      {/* <div className='text-gray-500 text-center fw-semibold fs-6'>
-        Not a Member yet?{' '}
-        <Link to='/auth/registration' className='link-primary'>
-          Sign up
-        </Link>
-      </div> */}
     </form>
   );
 }

@@ -20,11 +20,15 @@ button.btn.btn-primary {
   }
 }
 .header {
+  background-color: #2A394A;
   .header-brand {
-    background: rgba(255, 255, 255, 1);
+    background: #2A394A;
     .logo_img {
       filter: none;
     }
+  }
+  .symbol span{
+    color: #ffffff;
   }
 }
 .aside {

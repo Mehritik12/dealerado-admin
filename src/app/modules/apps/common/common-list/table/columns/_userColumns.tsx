@@ -27,17 +27,24 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].email} />,
   },
   {
-    Header: (props) => <UserCustomHeader tableProps={props} title='image' className='min-75px' />,
-    id: 'image',
-    Cell: ({ ...props }) => <ImageCell userObj={props.data[props.row.index].image} />,
+    Header: (props) => (
+      <UserCustomHeader tableProps={props} title='role' className='min-w-50px' />
+    ),
+    id: 'role',
+    Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].role} />,
   },
-  // {
-  //   Header: (props) => (  
-  //     <UserCustomHeader tableProps={props} title='Active' className='min-w-75px' />
-  //   ),
-  //   id: 'isActive',
-  //   Cell: ({ ...props }) => <ActiveCell user={props.data[props.row.index]} />,
-  // },
+  {
+    Header: (props) => <UserCustomHeader tableProps={props} title='image' className='min-75px' />,
+    id: 'profilePicture',
+    Cell: ({ ...props }) => <ImageCell userObj={props.data[props.row.index].profilePicture} />,
+  },
+  {
+    Header: (props) => (  
+      <UserCustomHeader tableProps={props} title='Active' className='min-w-75px' />
+    ),
+    id: 'isActive',
+    Cell: ({ ...props }) => <ActiveCell user={props.data[props.row.index]} />,
+  },
 ]
 
 export { usersColumns }

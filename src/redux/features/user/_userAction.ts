@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const API_URL_LIST = process.env.REACT_APP_LISTING_API_URL;
-const API_AUTH_URL = process.env.REACT_APP_AUTH_API_URL;
+const API_URL= process.env.REACT_APP_API_URL;
 
-const GET_ALL_USER = `${API_URL_LIST}/getAllUsers`;
-const UPDATE_USER_STATUS = `${API_AUTH_URL}/changeUserStatus`;
+const GET_ALL_USER = `${API_URL}/user/getAllUsers`;
+
+const UPDATE_USER_STATUS = `${API_URL}/getAllUsers`;
 
 export const getUsers = createAsyncThunk(
   "getUsers",
