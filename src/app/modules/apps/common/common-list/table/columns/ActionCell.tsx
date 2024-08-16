@@ -5,6 +5,7 @@ import {
   setCategoryModalStatus,
   setFormDetails,
   setModalStatus,
+  setUserModalStatus,
 } from "../../../../../../../redux/features/shared/sharedSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { conFirmMessage } from "../../../../../../../utils/shared";
@@ -20,6 +21,7 @@ import { Dropdown } from "react-bootstrap";
 import ThreeDotsIcon from "../../../../../../../_metronic/assets/logo/ThreeDotsIcon";
 import { Link } from "react-router-dom";
 import { deleteBanner, getBanner } from "../../../../../../../redux/features/banner/_bannerAction";
+import { deleteUser } from "../../../../../../../redux/features/user/_userAction";
 
 type Props = {
   user: any;
@@ -38,9 +40,12 @@ const ActionCell: FC<Props> = ({ user }) => {
       case "Category":
         dispatch(setCategoryModalStatus(true));
         break;
-        case "Banner":
+      case "Banner":
         dispatch(setBannerModalStatus(true));
         break;
+      case "User":
+        dispatch(setUserModalStatus(true));
+        break;  
 
       default:
     }
@@ -75,6 +80,12 @@ const ActionCell: FC<Props> = ({ user }) => {
             dispatch(getBanner({ page: 1, limit: 10 }));
           }, 100);
         }
+        else if (sharedActions.id === "User") {
+          dispatch(deleteUser({ id: itemId }));
+          setTimeout(() => {
+            dispatch(getBanner({ page: 1, limit: 10 }));
+          }, 100);
+        }
       }
     });
   };
@@ -88,7 +99,7 @@ const ActionCell: FC<Props> = ({ user }) => {
               <ThreeDotsIcon />
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>
+            <Dropdown.Menu >
               <Link
                 to={"#"}
                 className="menu-link px-3 btn  btn-active-light-primary btn-sm"

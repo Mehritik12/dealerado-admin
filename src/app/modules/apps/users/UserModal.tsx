@@ -2,46 +2,49 @@ import * as React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryModalStatus, setFormDetails, setUserModalStatus } from '../../../../redux/features/shared/sharedSlice';
+import { setFormDetails, setUserModalStatus } from '../../../../redux/features/shared/sharedSlice';
 import { Field, FormikProvider, useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
 import FieldInputText from '../common/InputFeilds/InputTextField';
 import * as Yup from "yup";
-import { addCategory, getCategory, updateCategory } from '../../../../redux/features/category/_categoryAction';
 import ReactSelect from 'react-select';
 import { ROLES } from '../../../../constants';
+import Required from '../../../../components/common/Required';
+import { addNewUser, getUsers, updateUser } from '../../../../redux/features/user/_userAction';
 
 function UserModal() {
   const dispatch: any = useDispatch();
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
-  const categoryFormValidation = Yup.object().shape({
+  const userFormValidation = Yup.object().shape({
     firstName: Yup.string().trim().required('Field is required'),
     lastName: Yup.string().trim().required('Field is required'),
     email: Yup.string().trim().required('Field is required'),
     mobileNumber: Yup.string().trim().required('Field is required'),
+    role: Yup.string().trim().required('Field is required'),
   });
 
 
   const formValues = {
-    firstName: sharedActions.formDetails.name || '',
-    role: sharedActions.formDetails.role || 'user',
-    description: sharedActions.formDetails.description || '',
-    image: sharedActions.formDetails.description || 'https://s3.ap-south-1.amazonaws.com/dealeradostorage/1718864818079.png',
+    firstName: sharedActions.formDetails.firstName || '',
+    lastName: sharedActions.formDetails.lastName || '',
+    email: sharedActions.formDetails.email || '',
+    mobileNumber: sharedActions.formDetails.mobileNumber || '',
+    role: ROLES?.find((r)=>r.value==sharedActions.formDetails.role) || ROLES[2],
   };
 
-  const categoryFormik = useFormik({
+  const userFormik = useFormik({
     initialValues: formValues,
-    validationSchema: categoryFormValidation,
+    validationSchema: userFormValidation,
     onSubmit: (values: any) => {
       if (sharedActions.formDetails._id) {
-        dispatch(updateCategory({ ...values, id: sharedActions.formDetails._id }))
+        dispatch(updateUser({ ...values, id: sharedActions.formDetails._id }))
       } else {
-        dispatch(addCategory(values))
+        dispatch(addNewUser(values));
       }
-      dispatch(setCategoryModalStatus(false))
+      dispatch(setUserModalStatus(false))
       dispatch(setFormDetails({}))
       setTimeout(() => {
-        dispatch(getCategory({ page: 1, limit: 10 }));
+        dispatch(getUsers({ page: 1, limit: 10 }));
       }, 100);
     },      
   });
@@ -59,8 +62,8 @@ function UserModal() {
           <Modal.Title>{!sharedActions.formDetails._id ? 'Add' : 'Update'} User</Modal.Title>
         </Modal.Header>
         <Modal.Body>  
-          <FormikProvider value={categoryFormik}>
-            <Form onSubmit={categoryFormik.handleSubmit}>
+          <FormikProvider value={userFormik}>
+            <Form onSubmit={userFormik.handleSubmit}>
               <div className="row">
                 <div className="col-sm-12 mb-6">
                 <Form.Group controlId="formFile" className="mb-3">
@@ -70,7 +73,7 @@ function UserModal() {
                 <Form.Group>
                     <Field
                       name="firstName"
-                      validate={categoryFormValidation}
+                      validate={userFormValidation}
                       type="text"
                       label="First Name"
                       component={FieldInputText}
@@ -79,7 +82,7 @@ function UserModal() {
                   <Form.Group>
                     <Field
                       name="lastName"
-                      validate={categoryFormValidation}
+                      validate={userFormValidation}
                       type="text"
                       label="Last Name"
                       component={FieldInputText}
@@ -88,7 +91,7 @@ function UserModal() {
                   <Form.Group>
                   <Field
                       name="email"
-                      validate={categoryFormValidation}
+                      validate={userFormValidation}
                       type="text"
                       label="Email"
                       component={FieldInputText}
@@ -97,19 +100,21 @@ function UserModal() {
                   <Form.Group>
                     <Field
                       name="mobileNumber"
-                      validate={categoryFormValidation}
+                      validate={userFormValidation}
                       type="text"
                       label="Mobile"
                       component={FieldInputText}
                     />
                   </Form.Group>
                   <Form.Group>
-                    <Form.Label>Role</Form.Label>
+                    <Form.Label>Role <Required/></Form.Label>
                     <ReactSelect
                       name="role"
                       placeholder="Role"
                       options={ROLES}
-                      onChange={(e)=>categoryFormik.setFieldValue('role',e)}
+                      menuPlacement={'top'}
+                      defaultValue={formValues.role}
+                      onChange={(e)=>userFormik.setFieldValue('role',e)}
                     />
                   </Form.Group>
                 </div>

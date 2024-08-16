@@ -41,7 +41,8 @@ const removeAuth = () => {
 }
 
 export function setupAxios(axios: any) {
-  axios.defaults.headers.Accept = 'application/json'
+  axios.defaults.headers.Accept = 'application/json';
+
   axios.interceptors.request.use(
     (config: {headers: {Authorization: string}}) => {
       const auth = getAuth();
@@ -52,7 +53,24 @@ export function setupAxios(axios: any) {
       return config
     },
     (err: any) => Promise.reject(err)
-  )
+  );
+
+  axios.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    async (error) => {
+      const { config, response: { status } } = error;
+      const originalRequest = config;
+
+      if ((status === 403 || status === 401) && !originalRequest._retry) {
+        originalRequest._retry = true;
+        localStorage.clear();
+        window.location.href= '/auth';
+      }
+      return Promise.reject(error);
+    }
+  );
 }
 
 export {getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY}
