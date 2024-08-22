@@ -5,32 +5,32 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "../common/common-list/components/pagination/Pagination";
 import { setId } from "../../../../redux/features/shared/sharedSlice";
-import { UserModal } from "./UserModal";
+import { UserModal } from "./AdminModal";
 import { getUsers } from "../../../../redux/features/user/_userAction";
-import { usersColumns } from "../common/common-list/table/columns/_userColumns";
 import { TYPE } from "../../../../utils/const";
-const role = 'user';
-const UserList = () => {
+import { adminColumns } from "../common/common-list/table/columns/_adminColumns";
+const role = 'admin'
+const AdminList = () => {
   const dispatch: any = useDispatch();
   const data: any = useSelector((state: any) => state.userList.data);
   const { totalRecord } = useSelector((state: any) => state.userList);
   const sharedActions = useSelector((state: any) => state.sharedActions);
 
   useEffect(() => {
-    dispatch(setId(TYPE.USER))
+    dispatch(setId(TYPE.ADMIN))
     dispatch(getUsers({ page: 1, limit: 10,role:role }));
   }, [dispatch]);
 
   const handleClick = (page: number) => {
-    dispatch(getUsers({ page: page, limit: 10 ,role:role}));
+    dispatch(getUsers({ page: page, limit: 10,role:role }));
   };
 
   return (
     <>
       <KTCard>
         <PartnersListHeader />
-        <CommonTable data={data} columns={usersColumns} />
-        {sharedActions.userModal && <UserModal/>}
+        <CommonTable data={data} columns={adminColumns} />
+        {sharedActions.adminModal && <UserModal/>}
         {totalRecord > 10 && (
           <Pagination totalRecord={totalRecord} handleClick={handleClick} />
         )}
@@ -39,4 +39,4 @@ const UserList = () => {
   );
 };
 
-export { UserList };
+export { AdminList };

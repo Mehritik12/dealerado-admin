@@ -1,24 +1,17 @@
 import "./style.scss";
 import { Slide, toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { getSpeciality } from "../redux/features/speciality/_specialityAction";
 import { getCategory } from "../redux/features/category/_categoryAction";
 import { getUsers } from "../redux/features/user/_userAction";
-import { getParnters } from "../redux/features/partner/_partnerAction";
+import { TYPE } from "./const";
 
 export const commonSwtichCases = (id: any, searchValue: any, dispatch: any) => {
     switch (id) {
-        case 'Speciality':
-            dispatch(getSpeciality({ search: searchValue.trim() }))
+        case TYPE.CATEGORY:
+            dispatch(getCategory({ search: searchValue}))
             break;
-        case 'Category':
-            dispatch(getCategory({ search: searchValue.trim() }))
-            break;
-        case 'PARTNER':
-            dispatch(getParnters({ search: searchValue.trim() }))
-            break;
-        case 'USER':
-            dispatch(getUsers({ search: searchValue.trim() }))
+        case TYPE.USER:
+            dispatch(getUsers({ search: searchValue}))
             break;
         default:
     }
@@ -28,28 +21,6 @@ export const conFirmMessage = (values) => {
     return Swal.fire(values)
 }
 
-export const commonUserStatusSwtichCases = (id: any, values: any, dispatch: any) => {
-    switch (id) {
-        case 'Speciality':
-            // dispatch(getSpeciality({ search: searchValue.trim() }))
-            break;
-        case 'Category':
-            // dispatch(getCategory({ search: searchValue.trim() }))
-            break;
-        case 'User':
-            // dispatch(getParnters({ search: searchValue.trim() }))
-            break;
-        default:
-    }
-}
-
-export const docUrl = (images: any) => {
-    const urlArray: any = [];
-    for (let i = 0; i < images.length; i++) {
-        urlArray.push(images[i].url);
-    }
-    return urlArray
-}
 
 export const toastifyOptions: any = {
     position: "top-center",

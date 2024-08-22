@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from "react";
 import {
+  setAdminModalStatus,
   setBannerModalStatus,
   setCategoryModalStatus,
   setFormDetails,
-  setModalStatus,
   setUserModalStatus,
 } from "../../../../../../../redux/features/shared/sharedSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,15 +13,12 @@ import {
   deleteCategory,
   getCategory,
 } from "../../../../../../../redux/features/category/_categoryAction";
-import {
-  deleteSpeciality,
-  getSpeciality,
-} from "../../../../../../../redux/features/speciality/_specialityAction";
 import { Dropdown } from "react-bootstrap";
 import ThreeDotsIcon from "../../../../../../../_metronic/assets/logo/ThreeDotsIcon";
 import { Link } from "react-router-dom";
 import { deleteBanner, getBanner } from "../../../../../../../redux/features/banner/_bannerAction";
 import { deleteUser } from "../../../../../../../redux/features/user/_userAction";
+import { TYPE } from "../../../../../../../utils/const";
 
 type Props = {
   user: any;
@@ -34,19 +31,18 @@ const ActionCell: FC<Props> = ({ user }) => {
   const openEditModal = () => {
     dispatch(setFormDetails(user));
     switch (sharedActions.id) {
-      case "Speciality":
-        dispatch(setModalStatus(true));
-        break;
-      case "Category":
+      case TYPE.CATEGORY:
         dispatch(setCategoryModalStatus(true));
         break;
-      case "Banner":
+      case TYPE.BANNER:
         dispatch(setBannerModalStatus(true));
         break;
-      case "User":
+      case TYPE.USER:
         dispatch(setUserModalStatus(true));
-        break;  
-
+        break;
+        case TYPE.ADMIN:
+          dispatch(setAdminModalStatus(true));
+          break;   
       default:
     }
   };
@@ -68,12 +64,7 @@ const ActionCell: FC<Props> = ({ user }) => {
           setTimeout(() => {
             dispatch(getCategory({ page: 1, limit: 10 }));
           }, 100);
-        } else if (sharedActions.id === "Speciality") {
-          dispatch(deleteSpeciality({ id: itemId }));
-          setTimeout(() => {
-            dispatch(getSpeciality({ page: 1, limit: 10 }));
-          }, 100);
-        }
+        } 
         else if (sharedActions.id === "Banner") {
           dispatch(deleteBanner({ id: itemId }));
           setTimeout(() => {

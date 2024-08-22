@@ -12,14 +12,29 @@ const PrivateRoutes = () => {
   const ChangePasswordPage = lazy(() => import("../modules/changePassword/ChangePasswordPage"));
   const CategoryPage = lazy(() => import("../modules/apps/category/CategoryPage"))
   const BannerPage = lazy(() => import("../modules/apps/banner/BannerPage"))
-
-
+  const AdminPage = lazy(() => import("../modules/apps/admin/AdminPage"))
 
   return (
     <>
       <Routes>
         <Route element={<MasterLayout />}>
           <Route path="auth/*" element={<Navigate to="/partners" />} />
+          <Route
+            path="users/*"
+            element={
+              <SuspensedView>
+                <UserPage />
+              </SuspensedView>
+            }
+          />
+          <Route
+            path="admin/*"
+            element={
+              <SuspensedView>
+                <AdminPage />
+              </SuspensedView>
+            }
+          />
           <Route
             path="category/*"
             element={
@@ -38,15 +53,7 @@ const PrivateRoutes = () => {
               </SuspensedView>
             }
           />
-          <Route
-            path="users/*"
-            element={
-              <SuspensedView>
-                <UserPage />
-              </SuspensedView>
-            }
-          />
-          <Route path="*" element={<Navigate to="/users/list" />} />
+          <Route path="*" element={<Navigate to="/admin/list" />} />
         </Route>
       </Routes>
     </>

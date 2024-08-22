@@ -2,13 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
   id: '',
-  showModal: false,
   categoryModal: false,
-  userModal: false,
-  partnerDetailsModal: false,
   bannerModal: false,
+  userModal: false,
+  adminModal: false,
   formDetails: {},
-  files: [],
 };
 
 export const sharedSlice = createSlice({
@@ -18,11 +16,6 @@ export const sharedSlice = createSlice({
     setId: (state, { payload }) => {
       state.id = payload
     },
-
-    setModalStatus: (state, { payload }) => {
-      state.showModal = payload
-    },
-
     setFormDetails: (state, { payload }) => {
       state.formDetails = payload
     },
@@ -32,29 +25,20 @@ export const sharedSlice = createSlice({
     setBannerModalStatus: (state, { payload }) => {
       state.bannerModal = payload
     },
-    setPartnerModalStatus: (state, { payload }) => {
-      state.partnerDetailsModal = payload
-    },
     setUserModalStatus: (state, { payload }) => {
       state.userModal = payload;
     },
-    setFiles: (state, { payload }) => {
-      state.files = payload.data
-    },
-    setPartnerProfileImages: (state, { payload }) => {
-      state.formDetails.profilePicture = payload.data[0]?.url
+    setAdminModalStatus: (state, { payload }) => {
+      state.adminModal = payload;
     },
   },
 });
 
 export const {
   setId,
-  setModalStatus,
   setFormDetails,
   setCategoryModalStatus,
   setUserModalStatus,
-  setPartnerModalStatus,
-  setFiles,
-  setPartnerProfileImages,
-  setBannerModalStatus
+  setBannerModalStatus,
+  setAdminModalStatus
 } = sharedSlice.actions;

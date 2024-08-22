@@ -9,8 +9,6 @@ import FieldInputText from '../common/InputFeilds/InputTextField';
 import * as Yup from "yup";
 import { addBanner, getBanner, updateBanner } from '../../../../redux/features/banner/_bannerAction';
 import FieldSelectInput from '../common/InputFeilds/InputSelectField';
-import { commonFileUpload } from '../../../../redux/features/partner/_partnerAction';
-import { useDropzone } from 'react-dropzone';
 
 function BannerModal() {
   const dispatch: any = useDispatch();

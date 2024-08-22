@@ -16,7 +16,7 @@ const FieldInputText = ({ field, form, ...props }: any) => {
                     placeholder={props.placeholder ? props.placeholder : `Enter ${props.label}`}
                     {...field} {...props}
                 ></Form.Control>
-                {touch && error ? <span style={{ color: '#ff8080', 'marginTop': '5px', 'fontSize': '13px' }} className="error">{error}</span> : null}
+                {touch && error ? <span style={{ color: '#ff8080', 'marginTop': '5px', 'fontSize': '13px' }} className="error ">{error}</span> : null}
             </Form.Group>
 
         </div >

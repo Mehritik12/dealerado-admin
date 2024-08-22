@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setAdminModalStatus,
   setFormDetails,
   setUserModalStatus,
 } from "../../../../redux/features/shared/sharedSlice";
@@ -21,27 +22,24 @@ import {
   REQUIRED,
 } from "../../../../utils/const";
 import FieldInputCheckbox from "../common/InputFeilds/InputCheckbox";
-const role = 'user';
 function UserModal() {
+  const role = 'admin'
   const dispatch: any = useDispatch();
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
   const userFormValidation = Yup.object().shape({
     name: Yup.string().trim().required(REQUIRED),
     email: Yup.string().trim().email().required(REQUIRED),
-    mobileNumber: Yup.string()
-      .trim()
-      .matches(INDIAN_PHONE_REGEX, INVALID_PHONE)
-      .required(REQUIRED),
-    dealershipName: Yup.string().trim().required(REQUIRED),
-    isKyc: Yup.boolean().optional(),
+    // mobileNumber: Yup.string()
+    //   .trim()
+    //   .matches(INDIAN_PHONE_REGEX, INVALID_PHONE)
+    //   .required(REQUIRED),
+    password: Yup.string().trim().required(REQUIRED)
   });
 
   const formValues = {
     name: sharedActions.formDetails.name || "",
     email: sharedActions.formDetails.email || "",
-    mobileNumber: sharedActions.formDetails.mobileNumber || "",
-    dealershipName: sharedActions.formDetails.dealershipName || "",
-    isKyc: sharedActions.formDetails.isKyc || false,
+    password: "",
   };
 
   const userFormik = useFormik({
@@ -49,26 +47,23 @@ function UserModal() {
     validationSchema: userFormValidation,
     onSubmit: (values: any) => {
       if (sharedActions.formDetails._id) {
-        dispatch(updateUser({ ...values, _id: sharedActions.formDetails._id }))
+        dispatch(updateUser({ ...values, _id: sharedActions.formDetails._id, role : role }))
       } else {
-        values.role = 'user'
+        values.role = role;
         dispatch(addNewUser(values))
       }
-      setTimeout(() => {
-        dispatch(getUsers({ page: 1, limit: 10 ,role:role}));
-      }, 100);
     },
   });
 
   const closeModal = () => {
-    dispatch(setUserModalStatus(false));
+    dispatch(setAdminModalStatus(false));
     dispatch(setFormDetails({}));
   };
 
   return (
     <>
       <Modal
-        show={sharedActions.userModal}
+        show={sharedActions.adminModal}
         onHide={closeModal}
         animation={true}
       >
@@ -106,33 +101,12 @@ function UserModal() {
                   </Form.Group>
                   <Form.Group>
                     <Field
-                      name="mobileNumber"
+                      name="password"
                       validate={userFormValidation}
                       type="text"
-                      label="Mobile"
+                      label="Password"
                       component={FieldInputText}
                     />
-                  </Form.Group>
-                  <Form.Group>
-                    <Field
-                      name="dealershipName"
-                      validate={userFormValidation}
-                      type="text"
-                      label="Dealership Name"
-                      component={FieldInputText}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <div className="d-flex">
-                      <Form.Label className="me-2">Kyc</Form.Label>
-                      <Field
-                        id="IsKyc"
-                        name="isKyc"
-                        validate={userFormValidation}
-                        component={FieldInputCheckbox}
-                        label=""
-                      />
-                    </div>
                   </Form.Group>
                 </div>
               </div>
