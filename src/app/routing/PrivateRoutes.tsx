@@ -5,6 +5,8 @@ import TopBarProgress from "react-topbar-progress-indicator";
 import { getCSSVariableValue } from "../../_metronic/assets/ts/_utils";
 import { WithChildren } from "../../_metronic/helpers";
 import UserPage from "../modules/apps/users/UserPage";
+import OrderPage from "../modules/apps/orders/OrderPage";
+import VehiclePage from "../modules/apps/vehicles/VehiclePage";
 
 
 
@@ -46,7 +48,22 @@ const PrivateRoutes = () => {
               </SuspensedView>
             }
           />
-          <Route path="*" element={<Navigate to="/users/list" />} />
+          <Route
+            path="orders/*"
+            element={
+              <SuspensedView>
+                <OrderPage />
+              </SuspensedView>
+            }
+          />
+          <Route
+            path="vehicles/*"
+            element={
+              <SuspensedView>
+                <VehiclePage />
+              </SuspensedView>
+            }
+          />
         </Route>
       </Routes>
     </>

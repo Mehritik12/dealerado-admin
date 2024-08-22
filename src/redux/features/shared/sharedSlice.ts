@@ -5,6 +5,8 @@ const initialState: any = {
   showModal: false,
   categoryModal: false,
   userModal: false,
+  orderModal: false,
+  vehicleModal: false,
   partnerDetailsModal: false,
   bannerModal: false,
   formDetails: {},
@@ -38,6 +40,12 @@ export const sharedSlice = createSlice({
     setUserModalStatus: (state, { payload }) => {
       state.userModal = payload;
     },
+    setOrderModalStatus: (state, { payload }) => {
+      state.orderModal = payload;
+    },
+    setVehicleModalStatus: (state, { payload }) => {
+      state.vehicleModal = payload;
+    },
     setFiles: (state, { payload }) => {
       state.files = payload.data
     },
@@ -56,5 +64,7 @@ export const {
   setPartnerModalStatus,
   setFiles,
   setPartnerProfileImages,
-  setBannerModalStatus
+  setBannerModalStatus,
+  setOrderModalStatus,
+  setVehicleModalStatus
 } = sharedSlice.actions;

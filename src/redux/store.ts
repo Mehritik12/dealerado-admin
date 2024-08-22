@@ -7,6 +7,8 @@ import { categoryList } from "./features/category/categorySlice";
 import { blogList } from "./features/blog/blogSlice";
 import {sharedSlice} from "./features/shared/sharedSlice"
 import { bannerList } from "./features/banner/bannerSlice";
+import { orderList } from "./features/order/orderSlice";
+import { vehicleList } from "./features/vehicle/vehicleSlice";
 export const store = configureStore({
   reducer: {
     partnerList: partnerList.reducer,
@@ -15,7 +17,9 @@ export const store = configureStore({
     categoryList: categoryList.reducer,
     blogList: blogList.reducer,
     sharedActions: sharedSlice.reducer,
-    bannerList: bannerList.reducer
+    bannerList: bannerList.reducer,
+    orderList: orderList.reducer,
+    vehicleList: vehicleList.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
