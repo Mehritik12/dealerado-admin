@@ -9,6 +9,7 @@ const initialState: any = {
   partnerDetailsModal: false,
   bannerModal: false,
   adminModal: false,
+  permissionModal: false,
   formDetails: {},
 };
 
@@ -46,6 +47,9 @@ export const sharedSlice = createSlice({
     setAdminModalStatus: (state, { payload }) => {
       state.adminModal = payload;
     },
+    setPermissionModalStatus: (state, { payload }) => {
+      state.permissionModal = payload;
+    },
   },
 });
 
@@ -59,5 +63,6 @@ export const {
   setBannerModalStatus,
   setOrderModalStatus,
   setVehicleModalStatus,
-  setAdminModalStatus
+  setAdminModalStatus,
+  setPermissionModalStatus
 } = sharedSlice.actions;

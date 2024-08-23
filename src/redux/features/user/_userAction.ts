@@ -6,7 +6,7 @@ const API_URL= process.env.REACT_APP_API_URL;
 const GET_ALL_USER = `${API_URL}/user/getAllUsers`;
 const USER_URL = `${API_URL}/user/`;
 const CREATE_USER = `${API_URL}/user/create`;
-const UPDATE_USER = `${API_URL}/user/updateProfile`;
+const UPDATE_USER = `${API_URL}/user/permission`;
 
 export const getUsers = createAsyncThunk(
   "getUsers",
@@ -53,6 +53,26 @@ export const updateUser = createAsyncThunk(
       notify(data.responseMessage,'success')
       dispatch(setFormDetails({}));
       dispatch(getUsers({ page: 1, limit: 10,role:role }))
+      dispatch(setUserModalStatus(false));
+      dispatch(setAdminModalStatus(false));
+      return data;
+    } catch (error: any) {
+      const message = error.response.data.responseMessage || ""
+      notify(message,'error')
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+export const updateUserPermission = createAsyncThunk(
+  "updateUserPermission",
+  async (values: any, { rejectWithValue, dispatch }) => {
+    try {
+      const id = values._id;
+      const { data } = await axios.put(`${UPDATE_USER}/${id}`, values);
+      notify(data.responseMessage,'success')
+      dispatch(setFormDetails({}));
+      dispatch(getUsers({ page: 1, limit: 10,role:'admin' }))
       dispatch(setUserModalStatus(false));
       dispatch(setAdminModalStatus(false));
       return data;

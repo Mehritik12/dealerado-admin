@@ -21,7 +21,6 @@ import {
   INVALID_PHONE,
   REQUIRED,
 } from "../../../../utils/const";
-import FieldInputCheckbox from "../common/InputFeilds/InputCheckbox";
 function UserModal() {
   const role = 'admin'
   const dispatch: any = useDispatch();
@@ -69,7 +68,7 @@ function UserModal() {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-            {!sharedActions.formDetails._id ? "Add" : "Update"} User
+            {!sharedActions.formDetails._id ? "Add" : "Update"} Admin
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -77,10 +76,6 @@ function UserModal() {
             <Form onSubmit={userFormik.handleSubmit}>
               <div className="row">
                 <div className="col-sm-12 mb-6">
-                  {/* <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>User Image</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group> */}
                   <Form.Group>
                     <Field
                       name="name"

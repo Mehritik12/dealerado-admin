@@ -3,6 +3,8 @@ import { Column } from 'react-table'
 import { TitleCell } from './TitleCell'
 import { UserCustomHeader } from './CustomHeader'
 import { ActionCell } from './ActionCell'
+import PermissionIcon from '../../../../../../icons/PermissionIcon'
+import { PermissionCell } from './PermissionCell'
 const adminColumns: ReadonlyArray<Column<User>> = [
   {
 
@@ -16,6 +18,16 @@ const adminColumns: ReadonlyArray<Column<User>> = [
     ),
     id: 'email',
     Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].email} />,
+  },
+  {
+    Header: (props) => (
+      <UserCustomHeader tableProps={props} title='Permissions' className='min-w-50px' />
+    ),
+    id: 'permission',
+    Cell: ({ ...props }) => <PermissionCell user={props.data[props.row.index]} />,
+    style:{
+      textAlign: 'center',
+    }
   },
   {
     Header: (props) => (

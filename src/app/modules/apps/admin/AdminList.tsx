@@ -9,6 +9,7 @@ import { UserModal } from "./AdminModal";
 import { getUsers } from "../../../../redux/features/user/_userAction";
 import { TYPE } from "../../../../utils/const";
 import { adminColumns } from "../common/common-list/table/columns/_adminColumns";
+import { AdminPermissionModal } from "./PermissionModal";
 const role = 'admin'
 const AdminList = () => {
   const dispatch: any = useDispatch();
@@ -31,6 +32,7 @@ const AdminList = () => {
         <PartnersListHeader />
         <CommonTable data={data} columns={adminColumns} />
         {sharedActions.adminModal && <UserModal/>}
+        {sharedActions.permissionModal && <AdminPermissionModal/>}
         {totalRecord > 10 && (
           <Pagination totalRecord={totalRecord} handleClick={handleClick} />
         )}
