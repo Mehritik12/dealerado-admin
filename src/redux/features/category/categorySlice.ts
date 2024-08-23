@@ -3,7 +3,7 @@ import { getCategory } from "./_categoryAction";
 
 const initialState: any = {
   data: [],
-  isLoading: true,
+  isLoading: false,
   isSuccess: false,
   responseCode: null,
   responseMessage: '',

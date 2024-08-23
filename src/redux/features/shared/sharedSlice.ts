@@ -10,6 +10,7 @@ const initialState: any = {
   bannerModal: false,
   adminModal: false,
   permissionModal: false,
+  addMoneyModal: false,
   formDetails: {},
 };
 
@@ -38,18 +39,15 @@ export const sharedSlice = createSlice({
     setVehicleModalStatus: (state, { payload }) => {
       state.vehicleModal = payload;
     },
-    setFiles: (state, { payload }) => {
-      state.files = payload.data
-    },
-    setPartnerProfileImages: (state, { payload }) => {
-      state.formDetails.profilePicture = payload.data[0]?.url
-    },
     setAdminModalStatus: (state, { payload }) => {
       state.adminModal = payload;
     },
     setPermissionModalStatus: (state, { payload }) => {
       state.permissionModal = payload;
     },
+    setAddMoneyModalStatus: (state, { payload }) => {
+      state.addMoneyModal = payload;
+    }
   },
 });
 
@@ -58,11 +56,10 @@ export const {
   setFormDetails,
   setCategoryModalStatus,
   setUserModalStatus,
-  setFiles,
-  setPartnerProfileImages,
   setBannerModalStatus,
   setOrderModalStatus,
   setVehicleModalStatus,
   setAdminModalStatus,
-  setPermissionModalStatus
+  setPermissionModalStatus,
+  setAddMoneyModalStatus
 } = sharedSlice.actions;

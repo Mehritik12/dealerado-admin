@@ -57,6 +57,7 @@ export const deleteBanner = createAsyncThunk(
       const { id } = values
       const { data } = await axios.delete(`${ADD_BANNER}/${id}`);
       notify(data.responseMessage, 'success');
+      dispatch(getBanner({ page: 1, limit: 10 }));
       return data;
     } catch (error: any) {
       const { responseMessage } = error.response?.data;

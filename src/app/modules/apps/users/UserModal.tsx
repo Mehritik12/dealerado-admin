@@ -34,6 +34,7 @@ function UserModal() {
       .required(REQUIRED),
     dealershipName: Yup.string().trim().required(REQUIRED),
     isKyc: Yup.boolean().optional(),
+    password:Yup.string().trim().required(REQUIRED),
   });
 
   const formValues = {
@@ -119,6 +120,15 @@ function UserModal() {
                       validate={userFormValidation}
                       type="text"
                       label="Dealership Name"
+                      component={FieldInputText}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Field
+                      name="password"
+                      validate={userFormValidation}
+                      type="password"
+                      label="Password"
                       component={FieldInputText}
                     />
                   </Form.Group>

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { KTIcon } from '../../../../../../../_metronic/helpers'
-import { setBannerModalStatus, setCategoryModalStatus, setOrderModalStatus, setUserModalStatus, setVehicleModalStatus } from '../../../../../../../redux/features/shared/sharedSlice';
+import { setAddMoneyModalStatus, setBannerModalStatus, setCategoryModalStatus, setFormDetails, setOrderModalStatus, setUserModalStatus, setVehicleModalStatus } from '../../../../../../../redux/features/shared/sharedSlice';
 import { setAdminModalStatus } from '../../../../../../../redux/features/shared/sharedSlice';
 import { TYPE } from '../../../../../../../utils/const';
 
@@ -17,18 +17,22 @@ const UsersListToolbar = () => {
         break;
       case TYPE.USER:
         dispatch(setUserModalStatus(true))
-        break;  
-      case 'Order':
+        dispatch(setFormDetails({}))
+        break;
+      case TYPE.ORDER:
         dispatch(setOrderModalStatus(true))
-        break;  
-      case 'Vehicle':
+        break;
+      case TYPE.VEHICLE:
         dispatch(setVehicleModalStatus(true))
-        break;    
+        break;
       default:
         break;
-        case TYPE.ADMIN:
-          dispatch(setAdminModalStatus(true))
+      case TYPE.ADMIN:
+        dispatch(setAdminModalStatus(true))
         break;
+        case TYPE.TRANSACTION:
+          dispatch(setAddMoneyModalStatus(true))
+          break;
     }
   }
 
@@ -38,11 +42,12 @@ const UsersListToolbar = () => {
         || sharedActions.id === TYPE.BANNER
         || sharedActions.id === TYPE.USER
         || sharedActions.id === TYPE.ADMIN
-        || sharedActions.id === "Order"
+        || sharedActions.id === TYPE.ORDER
+        || sharedActions.id === TYPE.TRANSACTION
       ) && <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
           <button type='button' className='btn btn-primary' onClick={openAddUserModal}>
             <KTIcon iconName='plus' className='fs-2' />
-            Add {sharedActions.id}
+            {sharedActions.id === TYPE.TRANSACTION ? 'Add Money' : `Add ${sharedActions.id}`}
           </button>
         </div>}
     </>

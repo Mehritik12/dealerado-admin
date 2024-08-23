@@ -3,7 +3,7 @@ import { getBanner } from "./_bannerAction";
 
 const initialState: any = {
   data: [],
-  isLoading: true,
+  isLoading: false,
   isSuccess: false,
   responseCode: null,
   responseMessage: '',

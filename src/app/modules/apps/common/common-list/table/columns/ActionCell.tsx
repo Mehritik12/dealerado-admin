@@ -59,23 +59,14 @@ const ActionCell: FC<Props> = ({ user }) => {
     };
     conFirmMessage(values).then((result) => {
       if (result.isConfirmed) {
-        if (sharedActions.id === "Category") {
+        if (sharedActions.id === TYPE.CATEGORY) {
           dispatch(deleteCategory({ id: itemId }));
-          setTimeout(() => {
-            dispatch(getCategory({ page: 1, limit: 10 }));
-          }, 100);
         } 
-        else if (sharedActions.id === "Banner") {
+        else if (sharedActions.id === TYPE.BANNER) {
           dispatch(deleteBanner({ id: itemId }));
-          setTimeout(() => {
-            dispatch(getBanner({ page: 1, limit: 10 }));
-          }, 100);
         }
-        else if (sharedActions.id === "User") {
+        else if (sharedActions.id === TYPE.USER) {
           dispatch(deleteUser({ id: itemId }));
-          setTimeout(() => {
-            dispatch(getBanner({ page: 1, limit: 10 }));
-          }, 100);
         }
       }
     });

@@ -5,6 +5,8 @@ import { ImageCell } from './ImageCell'
 import { ActiveCell } from './ActiveCell'
 import { UserCustomHeader } from './CustomHeader'
 import { ActionCell } from './ActionCell'
+import TransferMoneyCell from './TransferMoney'
+
 const usersColumns: ReadonlyArray<Column<User>> = [
   // {
   //   Header: (props) => <UserCustomHeader tableProps={props} title='image' className='min-75px' />,
@@ -32,19 +34,19 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     id: 'email',
     Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].email} />,
   },
-  // {
-  //   Header: (props) => (
-  //     <UserCustomHeader tableProps={props} title='role' className='min-w-50px' />
-  //   ),
-  //   id: 'role',
-  //   Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].role} />,
-  // },
   {
     Header: (props) => (  
       <UserCustomHeader tableProps={props} title='Active' className='min-w-75px' />
     ),
     id: 'active',
     Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].isKyc} />,
+  },
+  {
+    Header: (props) => (
+      <UserCustomHeader tableProps={props} title='wallet' className='min-w-50px' />
+    ),
+    id: 'wallet',
+    Cell: ({ ...props }) => <TransferMoneyCell userObj={props.data[props.row.index]} />,
   },
   {
     Header: (props) => (
