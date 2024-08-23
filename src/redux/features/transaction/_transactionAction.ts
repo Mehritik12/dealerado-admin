@@ -27,7 +27,7 @@ export const addMoney = createAsyncThunk(
     try {
       const { data } = await axios.post(`${ADD_MONEY}`, values);
       notify(data.responseMessage, 'success')
-      dispatch(getTransactions({ page: 1, limit: 10 }))
+      dispatch(getTransactions({ page: 1, limit: 10 ,userId:values.userId}))
       dispatch(setAddMoneyModalStatus(false));
       return data;
     } catch (error: any) {
