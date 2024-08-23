@@ -1,6 +1,7 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { PageLink, PageTitle } from "../../../../_metronic/layout/core";
 import { UserList } from "./UserList";
+import { TransactionList } from "../transactions/TransactionList";
 // import "./style.scss";
 
 const partnerBreadcrumbs: Array<PageLink> = [
@@ -28,6 +29,15 @@ const UserPage = () => {
             <>
               <PageTitle breadcrumbs={partnerBreadcrumbs}>User list</PageTitle>
               <UserList />
+            </>
+          }
+        />
+        <Route
+          path="transactions/:id"
+          element={
+            <>
+              <PageTitle breadcrumbs={partnerBreadcrumbs}>User list</PageTitle>
+              <TransactionList />
             </>
           }
         />

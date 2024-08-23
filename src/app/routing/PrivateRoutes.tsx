@@ -15,7 +15,6 @@ const PrivateRoutes = () => {
   const CategoryPage = lazy(() => import("../modules/apps/category/CategoryPage"))
   const BannerPage = lazy(() => import("../modules/apps/banner/BannerPage"))
   const AdminPage = lazy(() => import("../modules/apps/admin/AdminPage"))
-
   return (
     <>
       <Routes>

@@ -3,7 +3,7 @@ import { getVehicles } from "./_vehicleAction";
 
 const initialState: any = {
   data: [],
-  isLoading: true,
+  isLoading: false,
   isSuccess: false,
   responseCode: null,
   responseMessage: '',

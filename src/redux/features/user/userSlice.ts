@@ -3,10 +3,12 @@ import { getUsers } from "./_userAction";
 
 const initialState: any = {
   data: [],
-  isLoading: true,
+  isLoading: false,
   isSuccess: false,
   responseCode: null,
   responseMessage: '',
+  page:1,
+  limit:10,
   totalRecord: 0,
 };
 
