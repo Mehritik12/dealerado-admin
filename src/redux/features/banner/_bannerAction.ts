@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { notify } from "../../../utils/shared";
-const API_URL = process.env.REACT_APP_LISTING_API_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 const GET_ALL_BANNER = `${API_URL}/banner`;
 const ADD_BANNER = `${API_URL}/banner`;
 

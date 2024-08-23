@@ -20,7 +20,6 @@ const PrivateRoutes = () => {
     <>
       <Routes>
         <Route element={<MasterLayout />}>
-          <Route path="auth/*" element={<Navigate to="/partners" />} />
           <Route
             path="users/*"
             element={
@@ -45,7 +44,8 @@ const PrivateRoutes = () => {
               </SuspensedView>
             }
           />
-          <Route path="*" element={<Navigate to="/category/list" />} />
+
+         <Route path="*" element={<Navigate to="/banner/list" />} />
 
           <Route
             path="banner/*"

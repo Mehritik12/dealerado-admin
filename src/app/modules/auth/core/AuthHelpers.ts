@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode"
+
 const AUTH_LOCAL_STORAGE_KEY = 'kt-auth-react-v'
 const getAuth = (): any | undefined => {
   if (!localStorage) {
@@ -14,6 +16,20 @@ const getAuth = (): any | undefined => {
     }
   } catch (error) {
     console.error('AUTH LOCAL STORAGE PARSE ERROR', error)
+  }
+}
+
+export const getRole=()=>{
+  try {
+    const auth = getAuth();
+    if (auth && auth?.accessToken) {
+      let decoded:any= jwtDecode(auth.accessToken);
+      return decoded?.role||'user';
+    }else{
+      return 'user';
+    }
+  } catch (error) {
+    return 'user';
   }
 }
 
