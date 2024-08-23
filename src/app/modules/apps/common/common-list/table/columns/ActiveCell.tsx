@@ -1,7 +1,6 @@
 import { FC, useEffect } from "react";
 import { MenuComponent } from "../../../../../../../_metronic/assets/ts/components";
 import { useDispatch, useSelector } from "react-redux";
-import { commonUserStatusSwtichCases } from "../../../../../../../utils/shared";
 
 
 const ActiveCell: FC<any> = ({ user }) => {
@@ -15,7 +14,6 @@ const ActiveCell: FC<any> = ({ user }) => {
 
   const changeStatusQuery = (e: any, _id: any) => {
     const checkedValue = e.target.checked;
-    commonUserStatusSwtichCases(sharedActions.id, { _id, checkedValue }, dispatch)
   }
 
 

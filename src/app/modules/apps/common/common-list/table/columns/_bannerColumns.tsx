@@ -2,10 +2,8 @@
 import { Column } from 'react-table'
 import { TitleCell } from './TitleCell'
 import { ImageCell } from './ImageCell'
-import { ActiveCell } from './ActiveCell'
 import { UserCustomHeader } from './CustomHeader'
 import { User } from '../../core/_models'
-import { MappingCell } from './MappingCell'
 import { ActionCell } from './ActionCell'
 
 
