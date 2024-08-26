@@ -19,6 +19,7 @@ function TransactionModal() {
 
   const formValues = {
     amount: 100,
+    transactionType:"Points Added"
   };
 
   const walletFormik = useFormik({

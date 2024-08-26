@@ -10,6 +10,7 @@ import { setupAxios } from "../core/AuthHelpers";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setLoginUser } from "../../../../redux/features/shared/sharedSlice";
+import { getUserById } from "../../../../redux/features/userPermission/_userPermissionAction";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Please enter a valid email").required("Email is required"),
@@ -22,7 +23,7 @@ const initialValues = {
 };
 
 export function Login() {
-  const dispatch = useDispatch();
+  const dispatch:any = useDispatch();
   const [loading, setLoading] = useState(false);
   const [newPassType, setNewPassType] = useState(true);
   const { saveAuth, setCurrentUser} = useAuth();
@@ -39,6 +40,9 @@ export function Login() {
         dispatch(setLoginUser(auth?.data))
         setupAxios(axios);
         notify(auth.responseMessage, 'success');
+        setTimeout(() => {
+          dispatch(getUserById({}))
+        }, 1000);
       } catch (error: any) {
         console.log(error)
         saveAuth(undefined);

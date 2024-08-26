@@ -9,6 +9,7 @@ import { bannerList } from "./features/banner/bannerSlice";
 import { orderList } from "./features/order/orderSlice";
 import { vehicleList } from "./features/vehicle/vehicleSlice";
 import { transactionSlice } from "./features/transaction/transactionSlice";
+import { userPermissionSlice } from "./features/userPermission/userPermissionSlice";
 
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   sharedActions: sharedSlice.reducer,
   transactions:transactionSlice.reducer,
   bannerList: bannerList.reducer,
+  userPermission:userPermissionSlice.reducer
   // orderList: orderList.reducer,
   // vehicleList: vehicleList.reducer,
 });
@@ -24,7 +26,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["sharedActions"], // only reducers will be persisted
+  whitelist: ["sharedActions",'userPermission'], // only reducers will be persisted
   // blacklist: ['someReducer'] use blacklist to exclude specific reducers from being persisted
 };
 

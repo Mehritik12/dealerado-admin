@@ -8,6 +8,7 @@ const USER_URL = `${API_URL}/user/deleteUser`;
 const CREATE_USER = `${API_URL}/user/create`;
 const UPDATE_PERMISSION = `${API_URL}/user/permission`;
 const UPDATE_USER = `${API_URL}/user/updateProfile`;
+const GET_USER = `${API_URL}/user`;
 const role = 'user'
 
 export const getUsers = createAsyncThunk(
@@ -38,7 +39,7 @@ export const addNewUser = createAsyncThunk(
       dispatch(setFormDetails({}));
       return data;
     } catch (error: any) {
-      const message = error.response.data.responseMessage || ""
+      const message = error.response.data.responseMessage || "Something went wrong"
       notify(message, 'error')
       return rejectWithValue(error.response);
     }
@@ -61,7 +62,7 @@ export const updateUser = createAsyncThunk(
       dispatch(setAdminModalStatus(false));
       return data;
     } catch (error: any) {
-      const message = error.response.data.responseMessage || ""
+      const message = error.response.data.responseMessage || "Something went wrong"
       notify(message, 'error')
       return rejectWithValue(error.response);
     }
@@ -82,8 +83,8 @@ export const updateUserPermission = createAsyncThunk(
       dispatch(setAdminModalStatus(false));
       return data;
     } catch (error: any) {
-      const message = error.response.data.responseMessage || ""
-      notify(message,'error')
+      const message = error.response.data.responseMessage || "Something went wrong"
+      notify(message, 'error')
       return rejectWithValue(error.response);
     }
   }
@@ -101,10 +102,8 @@ export const deleteUser = createAsyncThunk(
       dispatch(getUsers({ page: page, limit: 10, role: role }))
       return data;
     } catch (error: any) {
-      const message = error.response.data.responseMessage || ""
-      if(message!==""){
-        notify(message, 'error')
-      }
+      const message = error.response.data.responseMessage || "Something went wrong"
+      notify(message, 'error')
       return rejectWithValue(error.message);
     }
   }
