@@ -8,11 +8,10 @@ import UserPage from "../modules/apps/users/UserPage";
 import OrderPage from "../modules/apps/orders/OrderPage";
 import VehiclePage from "../modules/apps/vehicles/VehiclePage";
 import { useSelector } from "react-redux";
-const role = 'sadmin';
-
 
 const PrivateRoutes = () => {
-  const userRole = useSelector((state:any)=>state?.sharedActions?.loginUser).role || role;
+  const role = 'sadmin';
+  const userRole = useSelector((state:any)=>state?.sharedActions?.loginUser?.role) || role;
   const ChangePasswordPage = lazy(() => import("../modules/changePassword/ChangePasswordPage"));
   const CategoryPage = lazy(() => import("../modules/apps/category/CategoryPage"))
   const BannerPage = lazy(() => import("../modules/apps/banner/BannerPage"))
