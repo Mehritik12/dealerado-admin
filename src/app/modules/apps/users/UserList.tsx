@@ -12,7 +12,7 @@ import { TYPE } from "../../../../utils/const";
 const role = 'user';
 const UserList = () => {
   const dispatch: any = useDispatch();
-  const data: any = useSelector((state: any) => state.userList.data);
+  const data: any = useSelector((state: any) => state.userList?.data);
   const { totalRecord } = useSelector((state: any) => state.userList);
   const sharedActions = useSelector((state: any) => state.sharedActions);
 

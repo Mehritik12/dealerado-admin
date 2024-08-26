@@ -11,13 +11,13 @@ import { ordersColumns } from "../common/common-list/table/columns/_orderColumns
 
 const OrderList = () => {
   const dispatch: any = useDispatch();
-  const data: any = useSelector((state: any) => state.orderList.data);
-  const { totalRecord } = useSelector((state: any) => state.orderList);
+  const data: any = useSelector((state: any) => state.orderList?.data)||[];
+  const totalRecord = useSelector((state: any) => state?.orderList?.totalRecord);
   const sharedActions = useSelector((state: any) => state.sharedActions);
 
   useEffect(() => {
-    dispatch(setId('Order'))
-    dispatch(getOrders({ page: 1, limit: 10 }));
+    // dispatch(setId('Order'))
+    // dispatch(getOrders({ page: 1, limit: 10 }));
   }, [dispatch]);
 
   const handleClick = (page: number) => {
@@ -31,7 +31,7 @@ const OrderList = () => {
         <CommonTable data={data} columns={ordersColumns} />
         {sharedActions.orderModal && <OrderModal/>}
         {totalRecord > 10 && (
-          <Pagination totalRecord={totalRecord} handleClick={handleClick} />
+          <Pagination totalRecord={totalRecord}  handleClick={handleClick} />
         )}
       </KTCard>
     </>

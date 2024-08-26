@@ -14,7 +14,7 @@ export const getUsers = createAsyncThunk(
   "getUsers",
   async (values: any, { rejectWithValue, dispatch }) => {
     try {
-      const { page, limit, search = '' } = values;
+      const { page=1, limit=10, search = '' } = values;
       const { data } = await axios.get(`${GET_ALL_USER}?page=${page}&limit=${limit}&search=${search}&role=${values.role}`, {});
       data.page = page;
       data.limit = limit;
@@ -73,9 +73,10 @@ export const updateUserPermission = createAsyncThunk(
   async (values: any, { rejectWithValue, dispatch }) => {
     try {
       const id = values._id;
+      delete values._id;
       const { data } = await axios.put(`${UPDATE_PERMISSION}/${id}`, values);
       notify(data.responseMessage,'success')
-      dispatch(setFormDetails({}));
+      // dispatch(setFormDetails({}));
       dispatch(getUsers({ page: 1, limit: 10,role:'admin' }))
       dispatch(setUserModalStatus(false));
       dispatch(setAdminModalStatus(false));

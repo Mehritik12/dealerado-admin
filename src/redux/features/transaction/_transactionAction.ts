@@ -10,7 +10,7 @@ export const getTransactions = createAsyncThunk(
   "getTransactions",
   async (values: any, { rejectWithValue, dispatch }) => {
     try {
-      const { userId, page, limit, search = '' } = values;
+      const { userId, page=1, limit=10, search = '' } = values;
       const { data } = await axios.get(`${GET_TRANSACTIONS}/${userId}?page=${page}&limit=${limit}&search=${search}`, {});
       data.page = parseInt(page) ;
       data.limit = parseInt(limit);

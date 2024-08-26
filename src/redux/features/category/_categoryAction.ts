@@ -9,7 +9,7 @@ export const getCategory = createAsyncThunk(
   "getCategory",
   async (values: any, { rejectWithValue, dispatch }) => {
     try {
-      const { page, limit, search = "" } = values;
+      const { page=1, limit=10, search = "" } = values;
       const { data } = await axios.get(`${GET_ALL_CATEGORY}?page=${page}&limit=${limit}&search=${search}`, {});
       return data;
     } catch (error: any) {

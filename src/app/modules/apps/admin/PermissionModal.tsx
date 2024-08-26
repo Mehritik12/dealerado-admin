@@ -17,20 +17,20 @@ function AdminPermissionModal() {
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
   const permissions= sharedActions.formDetails?.permissions;
   const formValues = {
-    createUser: permissions?.createUser || false,
-    readUser: permissions?.readUser|| true,
-    updateUser: permissions?.updateUser|| false,
-    deleteUser: permissions?.deleteUser|| false,
+    createUser: permissions.createUser ?? true,
+    readUser: permissions?.readUser?? true,
+    updateUser: permissions?.updateUser?? true,
+    deleteUser: permissions?.deleteUser?? true,
 
-    createBanner: permissions?.createBanner || false,
-    readBanner: permissions?.readBanner || true,
-    updateBanner: permissions?.updateBanner || false,
-    deleteBanner: permissions?.deleteBanner|| false,
+    createBanner: permissions?.createBanner ?? true,
+    readBanner: permissions?.readBanner ?? true,
+    updateBanner: permissions?.updateBanner ?? true,
+    deleteBanner: permissions?.deleteBanner?? true,
 
-    createOrder: permissions?.createOrder || false,
-    readOrder: permissions?.readOrder || true,
-    updateOrder: permissions?.updateOrder || false,
-    deleteOrder: permissions?.deleteOrder ||  false,
+    createOrder: permissions?.createOrder ?? true,
+    readOrder: permissions?.readOrder ?? true,
+    updateOrder: permissions?.updateOrder ?? true,
+    deleteOrder: permissions?.deleteOrder ??  true,
 
     // createVehicle: false,
     // readVehicle: true,
@@ -42,16 +42,11 @@ function AdminPermissionModal() {
     // updateChallan: false,
     // deleteChallan: false,
   };
-
   const userFormik = useFormik({
     initialValues: formValues,
+    enableReinitialize: true,
     onSubmit: (values: any) => {
-        dispatch(
-          updateUserPermission({
-            ...values,
-            _id: sharedActions.formDetails._id
-          })
-        );
+      dispatch(updateUserPermission({ ...values, _id: sharedActions.formDetails._id }));
     },
   });
 

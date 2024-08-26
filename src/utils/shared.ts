@@ -11,7 +11,7 @@ export const commonSwtichCases = (id: any, searchValue: any, dispatch: any) => {
             dispatch(getCategory({ search: searchValue}))
             break;
         case TYPE.USER:
-            dispatch(getUsers({ search: searchValue}))
+            dispatch(getUsers({ search: searchValue,role:'user'}))
             break;
         default:
     }

@@ -10,19 +10,17 @@ import { Field, FormikProvider, useFormik } from "formik";
 import { Form } from "react-bootstrap";
 import FieldInputText from "../common/InputFeilds/InputTextField";
 import * as Yup from "yup";
-import {
-  addNewUser,
-  getUsers,
-  updateUser,
-} from "../../../../redux/features/user/_userAction";
+import {  addNewUser,  updateUser,} from "../../../../redux/features/user/_userAction";
 import {
   INDIAN_PHONE_REGEX,
   INVALID_PHONE,
   REQUIRED,
 } from "../../../../utils/const";
 import FieldInputCheckbox from "../common/InputFeilds/InputCheckbox";
+import EyeIcon from "../../../icons/EyeIcon";
 const role = 'user';
 function UserModal() {
+  const [showPassword,setShowPassword] =React.useState(false)
   const dispatch: any = useDispatch();
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
   const userFormValidation = Yup.object().shape({
@@ -43,21 +41,19 @@ function UserModal() {
     mobileNumber: sharedActions.formDetails.mobileNumber || "",
     dealershipName: sharedActions.formDetails.dealershipName || "",
     isKyc: sharedActions.formDetails.isKyc || false,
+    password:""
   };
 
   const userFormik = useFormik({
     initialValues: formValues,
     validationSchema: userFormValidation,
     onSubmit: (values: any) => {
+        values.role = role
       if (sharedActions.formDetails._id) {
         dispatch(updateUser({ ...values, _id: sharedActions.formDetails._id }))
       } else {
-        values.role = 'user'
         dispatch(addNewUser(values))
       }
-      setTimeout(() => {
-        dispatch(getUsers({ page: 1, limit: 10 ,role:role}));
-      }, 100);
     },
   });
 
@@ -124,13 +120,22 @@ function UserModal() {
                     />
                   </Form.Group>
                   <Form.Group>
+                    <div className="position-relative">
                     <Field
                       name="password"
                       validate={userFormValidation}
-                      type="password"
+                      type={showPassword ?"text":"password"}
                       label="Password"
                       component={FieldInputText}
                     />
+                        <button
+                          onClick={()=>{setShowPassword(!showPassword)}}
+                            type="button"
+                            className="eyeBtn"
+                          >
+                        <EyeIcon/>
+                      </button>
+                  </div>  
                   </Form.Group>
                   <Form.Group>
                     <div className="d-flex">

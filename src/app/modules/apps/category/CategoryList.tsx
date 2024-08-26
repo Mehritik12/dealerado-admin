@@ -11,13 +11,13 @@ import { CategoryModal } from "./CategoryModal";
 
 const CategoryList = () => {
   const dispatch: any = useDispatch();
-  const data: any = useSelector((state: any) => state.categoryList.data);
+  const data: any = useSelector((state: any) => state.categoryList?.data) || [];
   const { totalRecord } = useSelector((state: any) => state.categoryList);
   const sharedActions = useSelector((state: any) => state.sharedActions);
 
   useEffect(() => {
-    dispatch(setId('Category'))
-    dispatch(getCategory({ page: 1, limit: 10 }));
+    // dispatch(setId('Category'))
+    // dispatch(getCategory({ page: 1, limit: 10 }));
   }, [dispatch]);
 
   const handleClick = (page: number) => {

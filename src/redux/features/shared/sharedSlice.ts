@@ -11,6 +11,7 @@ const initialState: any = {
   adminModal: false,
   permissionModal: false,
   addMoneyModal: false,
+  loginUser:{},
   formDetails: {},
 };
 
@@ -47,6 +48,9 @@ export const sharedSlice = createSlice({
     },
     setAddMoneyModalStatus: (state, { payload }) => {
       state.addMoneyModal = payload;
+    },
+    setLoginUser: (state, { payload }) => {
+      state.loginUser = payload;
     }
   },
 });
@@ -61,5 +65,6 @@ export const {
   setVehicleModalStatus,
   setAdminModalStatus,
   setPermissionModalStatus,
-  setAddMoneyModalStatus
+  setAddMoneyModalStatus,
+  setLoginUser
 } = sharedSlice.actions;

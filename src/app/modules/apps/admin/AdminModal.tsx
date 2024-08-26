@@ -21,7 +21,9 @@ import {
   INVALID_PHONE,
   REQUIRED,
 } from "../../../../utils/const";
+import EyeIcon from "../../../icons/EyeIcon";
 function UserModal() {
+  const [showPassword,setShowPassword] =React.useState(false)
   const role = 'admin'
   const dispatch: any = useDispatch();
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
@@ -95,13 +97,22 @@ function UserModal() {
                     />
                   </Form.Group>
                   <Form.Group>
+                    <div className="position-relative">
                     <Field
                       name="password"
                       validate={userFormValidation}
-                      type="text"
+                      type={showPassword ?"text":"password"}
                       label="Password"
                       component={FieldInputText}
                     />
+                    <button
+                        onClick={()=>{setShowPassword(!showPassword)}}
+                        type="button"
+                        className="eyeBtn"
+                      >
+                        <EyeIcon/>
+                      </button>
+                    </div>
                   </Form.Group>
                 </div>
               </div>
