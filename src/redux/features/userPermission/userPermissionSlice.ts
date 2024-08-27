@@ -24,7 +24,7 @@ export const userPermissionSlice = createSlice({
       .addCase(getUserById.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // state.loginUserPermission = payload.data;
+        state.permission = payload.data.permissions;
       })
       .addCase(getUserById.rejected, (state, { payload }) => {
         state.isLoading = false;

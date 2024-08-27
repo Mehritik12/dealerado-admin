@@ -8,7 +8,8 @@ export const TYPE = {
   ADMIN: 'Admin',
   TRANSACTION: 'Transaction',
   ORDER: 'Order',
-  VEHICLE: 'Vehicle'
+  VEHICLE: 'Vehicle',
+  SERVICE:'Services'
 }
 
 export const capitalizeFirstLetter = (string: string) => {

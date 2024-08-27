@@ -26,9 +26,9 @@ const HeaderUserMenu: FC = () => {
               Admin
               {/* {currentUser?.first_name} {currentUser?.first_name} */}
             </div>
-            <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
+            <div className='fw-bold text-muted  fs-7'>
               {currentUser?.email}
-            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -39,16 +39,16 @@ const HeaderUserMenu: FC = () => {
          Profile
         </Link>
       </div> */}
-      <div className='menu-item px-5'>
+      {/* <div className='menu-item px-5'>
         <Link to={'/user'} className='menu-link px-5'>
          Change Password
         </Link>
-      </div>
-      <div className='menu-item px-5'>
+      </div> */}
+      {/* <div className='menu-item px-5'>
         <a onClick={logout} className='menu-link px-5'>
           Sign Out
         </a>
-      </div>
+      </div> */}
     </div>
   )
 }

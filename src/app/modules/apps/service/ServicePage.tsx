@@ -1,12 +1,12 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { PageLink, PageTitle } from "../../../../_metronic/layout/core";
-import {  CategoryList } from "./CategoryList";
+import {  CategoryList } from "./ServiceList";
 // import "./style.scss";
 
 const partnerBreadcrumbs: Array<PageLink> = [
   {
-    title: "User Management",
-    path: "/category/list",
+    title: "Service Management",
+    path: "/service/list",
     isSeparator: false,
     isActive: false,
   },
@@ -26,13 +26,13 @@ const CategoryPage = () => {
           path="list"
           element={
             <>
-              <PageTitle breadcrumbs={partnerBreadcrumbs}>Category list</PageTitle>
+              <PageTitle breadcrumbs={partnerBreadcrumbs}>Service list</PageTitle>
               <CategoryList />
             </>
           }
         />
       </Route>
-      <Route index element={<Navigate to="/category/list" />} />
+      <Route index element={<Navigate to="/service/list" />} />
     </Routes>
   );
 };

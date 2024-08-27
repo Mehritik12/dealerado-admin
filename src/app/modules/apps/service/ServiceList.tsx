@@ -7,7 +7,8 @@ import { categoryColumns } from "../common/common-list/table/columns/_categoryCo
 import { getCategory } from "../../../../redux/features/category/_categoryAction";
 import { Pagination } from "../common/common-list/components/pagination/Pagination";
 import { setId } from "../../../../redux/features/shared/sharedSlice";
-import { CategoryModal } from "./CategoryModal";
+import { ServiceModal } from "./ServiceModal";
+import { TYPE } from "../../../../utils/const";
 
 const CategoryList = () => {
   const dispatch: any = useDispatch();
@@ -16,7 +17,7 @@ const CategoryList = () => {
   const sharedActions = useSelector((state: any) => state.sharedActions);
 
   useEffect(() => {
-    // dispatch(setId('Category'))
+    dispatch(setId(TYPE.SERVICE))
     // dispatch(getCategory({ page: 1, limit: 10 }));
   }, [dispatch]);
 
@@ -29,7 +30,7 @@ const CategoryList = () => {
       <KTCard>
         <PartnersListHeader />
         <CommonTable data={data} columns={categoryColumns} />
-        {sharedActions.categoryModal && <CategoryModal/>}
+        {sharedActions.serviceModal && <ServiceModal/>}
         {totalRecord > 10 && (
           <Pagination totalRecord={totalRecord} handleClick={handleClick} />
         )}

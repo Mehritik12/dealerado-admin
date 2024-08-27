@@ -36,10 +36,10 @@ const usersColumns: ReadonlyArray<Column<User>> = [
   },
   {
     Header: (props) => (  
-      <UserCustomHeader tableProps={props} title='Active' className='min-w-75px' />
+      <UserCustomHeader tableProps={props} title='Status' className='min-w-75px' />
     ),
-    id: 'active',
-    Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].isKyc} />,
+    id: 'status',
+    Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].isKyc ?"Active":"Inactive"} />,
   },
   {
     Header: (props) => (

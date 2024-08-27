@@ -6,6 +6,7 @@ import {checkIsActive, KTIcon, WithChildren} from '../../../helpers'
 import { useDispatch } from 'react-redux'
 import { setId } from '../../../../redux/features/shared/sharedSlice'
 import DashboardIcon from '../../../../app/icons/DashboardIcon'
+import { useAuth } from '../../../../app/modules/auth'
 
 type Props = {
   to: string
@@ -28,10 +29,15 @@ const AsideMenuItem: FC<Props & WithChildren> = ({
   const {pathname} = useLocation()
   const isActive = checkIsActive(pathname, to)
 
+  const {logout} = useAuth()
 
    const setTitle = ()=>{
     dispatch(setId(title))
+    if(title === 'Logout'){
+      logout()
+    }
    }
+   
 
   return (
     <div className='menu-item'>

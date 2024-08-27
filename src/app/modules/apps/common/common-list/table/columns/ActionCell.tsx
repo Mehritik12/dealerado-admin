@@ -3,7 +3,7 @@ import { FC } from "react";
 import {
   setAdminModalStatus,
   setBannerModalStatus,
-  setCategoryModalStatus,
+  setServiceModalStatus,
   setFormDetails,
   setUserModalStatus,
 } from "../../../../../../../redux/features/shared/sharedSlice";
@@ -31,8 +31,8 @@ const ActionCell: FC<Props> = ({ user }) => {
   const openEditModal = () => {
     dispatch(setFormDetails(user));
     switch (sharedActions.id) {
-      case TYPE.CATEGORY:
-        dispatch(setCategoryModalStatus(true));
+      case TYPE.SERVICE:
+        dispatch(setServiceModalStatus(true));
         break;
       case TYPE.BANNER:
         dispatch(setBannerModalStatus(true));

@@ -189,10 +189,26 @@ label.form-label {
         }
     }
 }
+table.dataTable {
+  min-height: 250px;
+}
 button.eyeBtn {
   position: absolute;
   top: 38px;
   right: 0;
   border: none;
   background: transparent;
+}
+.walletWrap {
+  a.btn {
+    padding: 8px !important;
+    background-color: #B52628;
+    &:hover {
+      opacity: 0.8;
+    }
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }

@@ -2,14 +2,14 @@ import * as React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryModalStatus, setFormDetails } from '../../../../redux/features/shared/sharedSlice';
+import { setServiceModalStatus, setFormDetails } from '../../../../redux/features/shared/sharedSlice';
 import { Field, FormikProvider, useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
 import FieldInputText from '../common/InputFeilds/InputTextField';
 import * as Yup from "yup";
 import { addCategory, getCategory, updateCategory } from '../../../../redux/features/category/_categoryAction';
 
-function CategoryModal() {
+function ServiceModal() {
   const dispatch: any = useDispatch();
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
 
@@ -24,7 +24,7 @@ function CategoryModal() {
   const formValues = {
     name: sharedActions.formDetails.name || '',
     description: sharedActions.formDetails.description || '',
-    image: sharedActions.formDetails.description || 'https://s3.ap-south-1.amazonaws.com/dealeradostorage/1718864818079.png',
+    image: sharedActions.formDetails.description||"",
   };
 
   const categoryFormik = useFormik({
@@ -36,7 +36,7 @@ function CategoryModal() {
       } else {
         dispatch(addCategory(values))
       }
-      dispatch(setCategoryModalStatus(false))
+      dispatch(setServiceModalStatus(false))
       dispatch(setFormDetails({}))
       setTimeout(() => {
         dispatch(getCategory({ page: 1, limit: 10 }));
@@ -45,36 +45,21 @@ function CategoryModal() {
   });
 
   const closeModal = () => {
-    dispatch(setCategoryModalStatus(false))
+    dispatch(setServiceModalStatus(false))
     dispatch(setFormDetails({}))
   }
 
   return (
     <>
 
-      <Modal show={sharedActions.categoryModal} onHide={closeModal} animation={true}>
+      <Modal show={sharedActions.serviceModal} onHide={closeModal} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title>{!sharedActions.formDetails._id ? 'Add' : 'Update'} Category</Modal.Title>
+          <Modal.Title>{!sharedActions.formDetails._id ? 'Add' : 'Update'} Service</Modal.Title>
         </Modal.Header>
         <Modal.Body>  
           <FormikProvider value={categoryFormik}>
             <Form onSubmit={categoryFormik.handleSubmit}>
               <div className="row">
-                <div className="col-sm-12 mb-6">
-                <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Category Image</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group>
-                  <Form.Group>
-                    <Field
-                      name="name"
-                      validate={categoryFormValidation}
-                      type="text"
-                      label="Name"
-                      component={FieldInputText}
-                    />
-                  </Form.Group>
-                </div>
                 <div className="col-sm-12 mb-6">
                   <Form.Group>
                     <Field
@@ -110,4 +95,4 @@ function CategoryModal() {
   );
 }
 
-export { CategoryModal };
+export { ServiceModal };

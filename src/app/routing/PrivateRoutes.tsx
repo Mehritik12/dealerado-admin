@@ -7,20 +7,17 @@ import { WithChildren } from "../../_metronic/helpers";
 import UserPage from "../modules/apps/users/UserPage";
 import OrderPage from "../modules/apps/orders/OrderPage";
 import VehiclePage from "../modules/apps/vehicles/VehiclePage";
-import { useSelector } from "react-redux";
+
 
 const PrivateRoutes = () => {
-  const role = 'sadmin';
-  const userRole = useSelector((state:any)=>state?.sharedActions?.loginUser?.role) || role;
-  const ChangePasswordPage = lazy(() => import("../modules/changePassword/ChangePasswordPage"));
-  const CategoryPage = lazy(() => import("../modules/apps/category/CategoryPage"))
+  const ServicePage = lazy(() => import("../modules/apps/service/ServicePage"))
   const BannerPage = lazy(() => import("../modules/apps/banner/BannerPage"))
   const AdminPage = lazy(() => import("../modules/apps/admin/AdminPage"))
   return (
     <>
       <Routes>
         <Route element={<MasterLayout />}>
-        <Route path="*" element={<Navigate to={userRole===role ? "/admin/list":"/banner/list"} />} />
+        <Route path="*" element={<Navigate to={`/users/list`} />} />
           <Route
             path="users/*"
             element={
@@ -38,10 +35,10 @@ const PrivateRoutes = () => {
             }
           />
           <Route
-            path="category/*"
+            path="service/*"
             element={
               <SuspensedView>
-                <CategoryPage />
+                <ServicePage />
               </SuspensedView>
             }
           />

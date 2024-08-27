@@ -1,14 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { notify } from "../../../utils/shared";
-import { setAdminModalStatus, setFormDetails, setUserModalStatus } from "../shared/sharedSlice";
+import { setAdminModalStatus, setFormDetails, setPermissionModalStatus, setUserModalStatus } from "../shared/sharedSlice";
 const API_URL = process.env.REACT_APP_API_URL;
 const GET_ALL_USER = `${API_URL}/user/getAllUsers`;
 const USER_URL = `${API_URL}/user/deleteUser`;
 const CREATE_USER = `${API_URL}/user/create`;
 const UPDATE_PERMISSION = `${API_URL}/user/permission`;
 const UPDATE_USER = `${API_URL}/user/updateProfile`;
-const GET_USER = `${API_URL}/user`;
 const role = 'user'
 
 export const getUsers = createAsyncThunk(
@@ -21,6 +20,8 @@ export const getUsers = createAsyncThunk(
       data.limit = limit;
       return data;
     } catch (error: any) {
+      const message = error.response?.data?.responseMessage || "";
+      notify(message, 'error')
       return rejectWithValue(error.message);
     }
   }
@@ -61,7 +62,7 @@ export const updateUser = createAsyncThunk(
       dispatch(setUserModalStatus(false));
       dispatch(setAdminModalStatus(false));
       return data;
-    } catch (error: any) {
+    } catch (error: any) {    
       const message = error.response.data.responseMessage || "Something went wrong"
       notify(message, 'error')
       return rejectWithValue(error.response);
@@ -81,6 +82,7 @@ export const updateUserPermission = createAsyncThunk(
       dispatch(getUsers({ page: 1, limit: 10,role:'admin' }))
       dispatch(setUserModalStatus(false));
       dispatch(setAdminModalStatus(false));
+      dispatch(setPermissionModalStatus(false));
       return data;
     } catch (error: any) {
       const message = error.response.data.responseMessage || "Something went wrong"
