@@ -35,9 +35,7 @@ function TransactionModal() {
     initialValues: formValues,
     validationSchema: userFormValidation,
     onSubmit: (values: any, { resetForm }) => {
-      if (sharedActions.formDetails && sharedActions.formDetails._id) {
-        dispatch(addMoney(values));
-      }
+      dispatch(addMoney(values));
     },
   });
 
@@ -49,7 +47,7 @@ function TransactionModal() {
   const userOptions = userList.map((user) => ({
     label: user.name,
     value: user._id,
-    eamil:user.email
+    email:user.email
   }));
 
   return (

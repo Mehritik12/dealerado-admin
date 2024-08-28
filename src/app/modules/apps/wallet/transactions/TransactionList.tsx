@@ -13,15 +13,15 @@ import { getUserBalance } from "../../../../../redux/features/transaction/_trans
 const TransactionList = () => {
   const dispatch: any = useDispatch();
   const data: any = useSelector((state: any) => state.transactions?.data) || [];
-  const totalRecord :number= useSelector((state: any) => state.transactions?.totalRecord) || 0;
+  const totalRecord: number = useSelector((state: any) => state.transactions?.totalRecord) || 0;
   const sharedActions = useSelector((state: any) => state.sharedActions);
-  const userBalance = useSelector((state:any)=>state.transactions?.userBalace?.wallet) || 0
+  const userBalance = useSelector((state: any) => state.transactions?.userBalace?.wallet)
 
   useEffect(() => {
     dispatch(setId(TYPE.TRANSACTION))
     if (sharedActions.formDetails._id) {
       dispatch(getTransactions({ userId: sharedActions.formDetails._id, page: 1, limit: 10 }));
-      dispatch(getUserBalance({userId:sharedActions.formDetails._id}))
+      dispatch(getUserBalance({ userId: sharedActions.formDetails._id }))
     }
   }, []);
 
@@ -32,12 +32,12 @@ const TransactionList = () => {
   return (
     <>
       <KTCard>
-      <div className="blockWrapper">
+        <div className="blockWrapper">
           <div className="row">
             <div className="col-lg-3 col-md-4 mb-3">
               <div className="blockAmount">
                 <p>Balance</p>
-                <label>₹ {parseInt(userBalance).toFixed(2)}</label>
+                <label>₹ {userBalance ? parseInt(userBalance).toFixed(2) : 0}</label>
               </div>
             </div>
             {/* <div className="col-sm-4 mb-3">

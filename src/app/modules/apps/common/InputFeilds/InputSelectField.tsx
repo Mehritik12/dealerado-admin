@@ -15,7 +15,7 @@ const FieldSelectInput = ({ field, form, ...props }: any) => {
                     <option value=''>{props['label']}</option>
                     {typeof props.options == 'object' && props.options.length !== 0 ? props.options.map((e: any, i: number) => {
                         return (
-                            <option className='text-capitalize' key={i} value={e.value ? e.value : e}>{e.label ? e.label : e}</option>
+                            <option  key={i} value={e.value ? e.value : e}> {e.email ? `${e.label ? e.label : e} (${e.email}) ` : (e.label ? e.label : e)}</option>
                         )
                     }) : <option value="" className='text-capitalize'>{props.options}</option>}
 
