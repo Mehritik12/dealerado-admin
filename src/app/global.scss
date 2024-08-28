@@ -95,8 +95,16 @@ table.dataTable {
     background: rgba(248, 249, 252, 1);
     th {
       color: rgba(29, 36, 51, 0.65);
-      font-weight: 500 !important;
+      // font-weight: 500 !important;
       white-space: nowrap;
+    }
+
+  }
+  tr {
+    td {
+      &:first-child {
+        text-transform: capitalize;
+      }
     }
   }
   .verifiedOptions.dropdown {
@@ -189,8 +197,9 @@ label.form-label {
         }
     }
 }
-table.dataTable {
-  min-height: 250px;
+table.dataTable, table.dataTable td, table.dataTable th {
+  /* min-height: 250px; */
+  border: 1px solid #999 !important;
 }
 button.eyeBtn {
   position: absolute;
@@ -206,9 +215,45 @@ button.eyeBtn {
     &:hover {
       opacity: 0.8;
     }
+    &:active {
+      background-color: #B52628 !important;
+    }
     img {
       width: 20px;
       height: 20px;
+    }
+  }
+}
+.blockWrapper {
+  padding: 15px 0.75rem;
+  h1 {
+    margin: 15px 0;
+  }
+  .blockAmount {
+    border: 1px solid #28a745;
+    border-radius: 10px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    // background-color: #28a745;
+    p {
+      margin-bottom: 0px;
+      // color: #28a745;
+    }
+    label {
+      font-size: 24px;
+      font-weight: 700;
+      color: #28a745;
+    }
+  }
+}
+.table {
+  thead {
+    th {
+      color: #252f4a !important;
+      font-weight: 700 !important;
     }
   }
 }

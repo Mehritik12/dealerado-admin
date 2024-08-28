@@ -1,4 +1,4 @@
-import { PartnersListHeader } from "../common/common-list/components/header/ListHeader";
+import { CommonHeader } from "../common/common-list/components/header/ListHeader";
 import { CommonTable } from "../common/common-list/table/Table";
 import { KTCard } from "../../../../_metronic/helpers";
 import { useEffect } from "react";
@@ -27,7 +27,7 @@ const OrderList = () => {
   return (
     <>
       <KTCard>
-        <PartnersListHeader />
+        <CommonHeader />
         <CommonTable data={data} columns={ordersColumns} />
         {sharedActions.orderModal && <OrderModal/>}
         {totalRecord > 10 && (

@@ -1,18 +1,18 @@
-import { UsersListToolbar } from './ListToolbar'
-import { CommonListSearchComponent } from './ListSearchComponent'
+import { CommonToolbar } from './ListToolbar'
+import { CommonSearchComponent } from './ListSearchComponent'
 
-const PartnersListHeader = () => {
+const CommonHeader = () => {
 
   return (
     <>
       <div className='card-header border-0 pt-6 justify-content-end'>
-        <CommonListSearchComponent />
+        <CommonSearchComponent />
         <div className='card-toolbar'>
-           <UsersListToolbar />
+           <CommonToolbar />
         </div>
       </div>
     </>
   )
 }
 
-export { PartnersListHeader }
+export { CommonHeader }

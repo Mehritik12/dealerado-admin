@@ -1,4 +1,4 @@
-import { PartnersListHeader } from "../common/common-list/components/header/ListHeader";
+import { CommonHeader } from "../common/common-list/components/header/ListHeader";
 import { CommonTable } from "../common/common-list/table/Table";
 import { KTCard } from "../../../../_metronic/helpers";
 import { useEffect } from "react";
@@ -26,7 +26,7 @@ const BannerList = () => {
   return (
     <>
       <KTCard>
-        <PartnersListHeader />
+        <CommonHeader />
         <CommonTable data={data} columns={bannerColumns} />
         {sharedActions.bannerModal && <BannerModal/>}
         {totalRecord > 10 && (

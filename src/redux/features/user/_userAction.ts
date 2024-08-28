@@ -10,11 +10,12 @@ const UPDATE_PERMISSION = `${API_URL}/user/permission`;
 const UPDATE_USER = `${API_URL}/user/updateProfile`;
 const role = 'user'
 
+
 export const getUsers = createAsyncThunk(
   "getUsers",
   async (values: any, { rejectWithValue, dispatch }) => {
     try {
-      const { page=1, limit=10, search = '' } = values;
+      const { page = 1, limit = 10, search = '' } = values;
       const { data } = await axios.get(`${GET_ALL_USER}?page=${page}&limit=${limit}&search=${search}&role=${values.role}`, {});
       data.page = page;
       data.limit = limit;
@@ -62,7 +63,7 @@ export const updateUser = createAsyncThunk(
       dispatch(setUserModalStatus(false));
       dispatch(setAdminModalStatus(false));
       return data;
-    } catch (error: any) {    
+    } catch (error: any) {
       const message = error.response.data.responseMessage || "Something went wrong"
       notify(message, 'error')
       return rejectWithValue(error.response);
@@ -77,9 +78,9 @@ export const updateUserPermission = createAsyncThunk(
       const id = values._id;
       delete values._id;
       const { data } = await axios.put(`${UPDATE_PERMISSION}/${id}`, values);
-      notify(data.responseMessage,'success')
+      notify(data.responseMessage, 'success')
       // dispatch(setFormDetails({}));
-      dispatch(getUsers({ page: 1, limit: 10,role:'admin' }))
+      dispatch(getUsers({ page: 1, limit: 10, role: 'admin' }))
       dispatch(setUserModalStatus(false));
       dispatch(setAdminModalStatus(false));
       dispatch(setPermissionModalStatus(false));

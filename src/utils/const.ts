@@ -5,11 +5,12 @@ export const TYPE = {
   USER: 'User',
   CATEGORY: 'Category',
   BANNER: 'Banner',
-  ADMIN: 'Admin',
+  ADMIN: 'Employee',
   TRANSACTION: 'Transaction',
   ORDER: 'Order',
   VEHICLE: 'Vehicle',
-  SERVICE:'Services'
+  SERVICE:'Service',
+  WALLET:'Wallet'
 }
 
 export const capitalizeFirstLetter = (string: string) => {

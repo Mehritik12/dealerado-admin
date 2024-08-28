@@ -1,4 +1,4 @@
-import { PartnersListHeader } from "../common/common-list/components/header/ListHeader";
+import { CommonHeader } from "../common/common-list/components/header/ListHeader";
 import { CommonTable } from "../common/common-list/table/Table";
 import { KTCard } from "../../../../_metronic/helpers";
 import { useEffect } from "react";
@@ -29,7 +29,7 @@ const AdminList = () => {
   return (
     <>
       <KTCard>
-        <PartnersListHeader />
+        <CommonHeader />
         <CommonTable data={data} columns={adminColumns} />
         {sharedActions.adminModal && <UserModal/>}
         {sharedActions.permissionModal && <AdminPermissionModal/>}

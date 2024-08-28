@@ -19,14 +19,14 @@ const CommonTable = (props: any) => {
           className=" table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
           {...getTableProps()}
         >
-          <thead>
+          <thead className="text-gray-600 ">
             <tr className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
               {headers.map((column: ColumnInstance<any>) => (
                 <CustomHeaderColumn key={column?.id} column={column} />
               ))}
             </tr>
           </thead>
-          <tbody className="text-gray-600 fw-bold" {...getTableBodyProps()}>
+          <tbody className="fw-bold" {...getTableBodyProps()}>
             {rows.length > 0 ? (
               rows.map((row: Row<any>, i) => {
                 prepareRow(row);

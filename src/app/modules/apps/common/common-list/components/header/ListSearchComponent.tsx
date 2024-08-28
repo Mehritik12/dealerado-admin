@@ -2,32 +2,39 @@
 import { KTIcon } from '../../../../../../../_metronic/helpers'
 import { useDispatch, useSelector } from 'react-redux';
 import { commonSwtichCases } from '../../../../../../../utils/shared';
+import { TYPE } from '../../../../../../../utils/const';
 
-const CommonListSearchComponent = () => {
+const CommonSearchComponent = () => {
   const sharedActions = useSelector((state: any) => state.sharedActions);
   const dispatch = useDispatch();
   const searchQuery = (searchValue: string) => {
-    commonSwtichCases(sharedActions.id, searchValue,dispatch)
+    commonSwtichCases(sharedActions.id, searchValue, dispatch)
   }
 
 
 
   return (
-    <div className='card-title'>
-      <div className='d-flex align-items-center position-relative my-1'>
-        <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />
-        <input
-          type='text'
-          data-kt-user-table-filter='search'
-          className='form-control form-control-solid w-200px ps-14'
-          placeholder='Search...'
-          // value={searchTerm}
-          onChange={(e) => searchQuery(e.target.value)}
-        />
-      </div>
-      {/* end::Search */}
-    </div>
+    <>
+      {(sharedActions.id === TYPE.CATEGORY
+        || sharedActions.id === TYPE.BANNER
+        || sharedActions.id === TYPE.USER
+        || (sharedActions.id === TYPE.ADMIN)
+        || sharedActions.id === TYPE.ORDER
+        || sharedActions.id === TYPE.WALLET
+      ) && <div className='card-title'>
+          <div className='d-flex align-items-center position-relative my-1'>
+            <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />
+            <input
+              type='text'
+              data-kt-user-table-filter='search'
+              className='form-control form-control-solid w-200px ps-14'
+              placeholder='Search...'
+              onChange={(e) => searchQuery(e.target.value)}
+            />
+          </div>
+        </div>}
+    </>
   )
 }
 
-export { CommonListSearchComponent }
+export { CommonSearchComponent }

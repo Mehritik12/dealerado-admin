@@ -11,15 +11,13 @@ const FieldSelectInput = ({ field, form, ...props }: any) => {
         <div>
             <Form.Group className="mb-3" controlId={field.name}>
                 <Form.Label>{props.label}<span>*</span></Form.Label>
-                <Form.Select  {...field} {...props}
-                    name={props.name}
-                >
+                <Form.Select  {...field} {...props}  name={props.name}>
                     <option value=''>{props['label']}</option>
-                    {typeof props.options == 'object' && props.options.length != 0 ? props.options.map((e: any, i: number) => {
+                    {typeof props.options == 'object' && props.options.length !== 0 ? props.options.map((e: any, i: number) => {
                         return (
-                            <option key={i} value={e.value ? e.value : e}>{e.label ? e.label : e}</option>
+                            <option className='text-capitalize' key={i} value={e.value ? e.value : e}>{e.label ? e.label : e}</option>
                         )
-                    }) : <option value="">{props.options}</option>}
+                    }) : <option value="" className='text-capitalize'>{props.options}</option>}
 
                 </Form.Select>
                 {touch && error ? <span style={{ color: '#ff8080', 'marginTop': '5px', 'fontSize': '13px' }} className="error">{error}</span> : null}

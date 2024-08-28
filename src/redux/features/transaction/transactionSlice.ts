@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMoney, getTransactions } from "./_transactionAction";
+import { addMoney, getAllUserBalance, getTransactions, getUserBalance } from "./_transactionAction";
 
 const initialState: any = {
   data: [],
+  userBalace:{},
+  allUserBalance:{},
   isLoading: false,
   isSuccess: false,
   errorMessage: "",
@@ -47,6 +49,37 @@ export const transactionSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.errorMessage = payload.data;
+      })
+      .addCase(getUserBalance.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+      })
+
+      .addCase(getUserBalance.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userBalace = payload.data;
+      })
+      .addCase(getUserBalance.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.errorMessage = payload;
+      })
+
+      .addCase(getAllUserBalance.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+      })
+
+      .addCase(getAllUserBalance.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.allUserBalance = payload.data;
+      })
+      .addCase(getAllUserBalance.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.errorMessage = payload;
       });
   },
 });
