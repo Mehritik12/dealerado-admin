@@ -14,6 +14,7 @@ type Props = {
   icon?: any
   fontIcon?: string
   hasBullet?: boolean
+  type:string
 }
 
 const AsideMenuItem: FC<Props & WithChildren> = ({
@@ -22,6 +23,7 @@ const AsideMenuItem: FC<Props & WithChildren> = ({
   to,
   title,
   icon,
+  type,
   fontIcon,
   hasBullet = false,
 }) => {
@@ -32,7 +34,7 @@ const AsideMenuItem: FC<Props & WithChildren> = ({
   const {logout} = useAuth()
 
    const setTitle = ()=>{
-    dispatch(setId(title))
+    dispatch(setId(type))
     if(title === 'Logout'){
       logout()
     }

@@ -36,18 +36,18 @@ const usersColumns: ReadonlyArray<Column<User>> = [
   },
   {
     Header: (props) => (  
-      <UserCustomHeader tableProps={props} title='Status' className='min-w-75px' />
+      <UserCustomHeader tableProps={props} title='KYC' className='min-w-75px' />
     ),
     id: 'status',
     Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].isKyc ?"Active":"Inactive"} />,
   },
-  {
-    Header: (props) => (
-      <UserCustomHeader tableProps={props} title='wallet' className='min-w-50px' />
-    ),
-    id: 'wallet',
-    Cell: ({ ...props }) => <TransferMoneyCell userObj={props.data[props.row.index]} />,
-  },
+  // {
+  //   Header: (props) => (
+  //     <UserCustomHeader tableProps={props} title='wallet' className='min-w-50px' />
+  //   ),
+  //   id: 'wallet',
+  //   Cell: ({ ...props }) => <TransferMoneyCell userObj={props.data[props.row.index]} />,
+  // },
   {
     Header: (props) => (
     <UserCustomHeader tableProps={props} title="Action" className=" min-w-100px"/>),

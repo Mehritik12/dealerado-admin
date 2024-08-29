@@ -1,13 +1,13 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { PageLink, PageTitle } from "../../../../_metronic/layout/core";
-import { UserList } from "./UserList";
-import { TransactionList } from "../wallet/transactions/TransactionList";
+import { UserList } from "./WalletList";
+import { TransactionList } from "./transactions/TransactionList";
 // import "./style.scss";
 
 const partnerBreadcrumbs: Array<PageLink> = [
   {
     title: "User Management",
-    path: "/users/list",
+    path: "/wallet/list",
     isSeparator: false,
     isActive: false,
   },
@@ -27,22 +27,22 @@ const UserPage = () => {
           path="list"
           element={
             <>
-              <PageTitle breadcrumbs={partnerBreadcrumbs}>User list</PageTitle>
+              <PageTitle breadcrumbs={partnerBreadcrumbs}>Users list</PageTitle>
               <UserList />
             </>
           }
         />
         <Route
-          path="transactions/:id"
+          path="/:id"
           element={
             <>
-              <PageTitle breadcrumbs={partnerBreadcrumbs}>User list</PageTitle>
+              <PageTitle breadcrumbs={partnerBreadcrumbs}>Transactions List</PageTitle>
               <TransactionList />
             </>
           }
         />
       </Route>
-      <Route index element={<Navigate to="/users/list" />} />
+      <Route index element={<Navigate to="/wallet/list" />} />
     </Routes>
   );
 };

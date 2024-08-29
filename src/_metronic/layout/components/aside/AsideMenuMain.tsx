@@ -21,16 +21,16 @@ export function AsideMenuMain() {
   return (
     <>
       {/* <AsideMenuItem to="/dashboard" icon={<PartnersIcon />} title="Dashboard" /> */}
-      <AsideMenuItem to="/users" icon={<PartnersIcon />} title="Users" />
-      <AsideMenuItem to="/orders" icon={<OrderIcon />} title="Orders" />
+      <AsideMenuItem to="/users" icon={<PartnersIcon />} title="Users" type = 'User' />
+      {/* <AsideMenuItem to="/orders" icon={<OrderIcon />} title="Orders"  type = 'Order'/> */}
       {/* <AsideMenuItem to="/banner" icon={<CategoryIcon/>} title="Banner" /> */}
-      {/* <AsideMenuItem to="/wallet" icon={<CategoryIcon/>} title="Wallet Management" /> */}
-      <AsideMenuItem to="/service" icon={<CategoryIcon/>} title="Services" />
-      {role === 'sadmin' && <AsideMenuItem to="/admin" icon={<AdminIcons />} title="Employees" />}
+      <AsideMenuItem to="/wallet" icon={<CategoryIcon/>} title="Wallet Management" type = 'Money' />
+      {/* <AsideMenuItem to="/service" icon={<CategoryIcon/>} title="Service" /> */}
+      {role === 'sadmin' && <AsideMenuItem to="/admin" icon={<AdminIcons />} title="Employees" type = 'Employee'/>}
       {/* <AsideMenuItem to="/coupon" icon={<CategoryIcon/>} title="Coupons" /> */}
       {/* <AsideMenuItem to="/report" icon={<ReportIcon/>} title="Reports" /> */}
       {/* <AsideMenuItem to="/report" icon={<MaintanceModeIcon/>} title="Maintainance Mode" /> */}
-      <AsideMenuItem to="/signin" icon={<LogoutIcon />} title="Logout" />
+      <AsideMenuItem to="/signin" icon={<LogoutIcon />} title="Logout" type = 'Logout'/>
     </>
   );
 }

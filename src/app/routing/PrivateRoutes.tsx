@@ -13,6 +13,7 @@ const PrivateRoutes = () => {
   const ServicePage = lazy(() => import("../modules/apps/service/ServicePage"))
   const BannerPage = lazy(() => import("../modules/apps/banner/BannerPage"))
   const AdminPage = lazy(() => import("../modules/apps/admin/AdminPage"))
+  const WalletPage = lazy(() => import("../modules/apps/wallet/WalletPage"));
   return (
     <>
       <Routes>
@@ -34,6 +35,14 @@ const PrivateRoutes = () => {
               </SuspensedView>
             }
           />
+            <Route
+            path="wallet/*"
+            element={
+              <SuspensedView>
+                <WalletPage />
+              </SuspensedView>
+            }
+          />
           <Route
             path="service/*"
             element={
@@ -47,14 +56,6 @@ const PrivateRoutes = () => {
             element={
               <SuspensedView>
                 <BannerPage />
-              </SuspensedView>
-            }
-          />
-          <Route
-            path="users/*"
-            element={
-              <SuspensedView>
-                <UserPage />
               </SuspensedView>
             }
           />

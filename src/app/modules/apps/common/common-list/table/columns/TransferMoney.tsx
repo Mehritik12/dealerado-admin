@@ -12,7 +12,7 @@ const TransferMoneyCell: FC<any> = ({ userObj }) => {
       <div className="d-flex align-items-center walletWrap">
         <div className="menu-item">
           
-          <Link className="btn " to={`/users/transactions/${userObj._id}`}
+          <Link className="btn " to={`/wallet/${userObj._id}`}
             // type="button"
             // className={`btn btn-primary btn-sm`}
             // data-kt-users-table-filter="delete_row"

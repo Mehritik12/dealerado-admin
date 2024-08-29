@@ -4,9 +4,8 @@ import { setAddMoneyModalStatus, setBannerModalStatus, setServiceModalStatus, se
 import { setAdminModalStatus } from '../../../../../../../redux/features/shared/sharedSlice';
 import { TYPE } from '../../../../../../../utils/const';
 
-const UsersListToolbar = () => {
+const CommonToolbar = () => {
   const sharedActions = useSelector((state: any) => state.sharedActions);
-  const permissions = useSelector((state: any) => state.userPermission.permission);
   const dispatch = useDispatch();
   const openAddUserModal = () => {
     switch (sharedActions.id) {
@@ -31,9 +30,9 @@ const UsersListToolbar = () => {
       case TYPE.ADMIN:
         dispatch(setAdminModalStatus(true))
         break;
-        case TYPE.TRANSACTION:
-          dispatch(setAddMoneyModalStatus(true))
-          break;
+      case TYPE.WALLET:
+        dispatch(setAddMoneyModalStatus(true))
+        break;
     }
   }
 
@@ -44,16 +43,15 @@ const UsersListToolbar = () => {
         || sharedActions.id === TYPE.USER
         || (sharedActions.id === TYPE.ADMIN)
         || sharedActions.id === TYPE.ORDER
-        || sharedActions.id === TYPE.TRANSACTION
-        || sharedActions.id === TYPE.SERVICE
+        || sharedActions.id === TYPE.WALLET
       ) && <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
           <button type='button' className='btn btn-primary' onClick={openAddUserModal}>
             <KTIcon iconName='plus' className='fs-2' />
-            {sharedActions.id === TYPE.TRANSACTION ? 'Add Money' : `Add ${sharedActions.id}`}
+            {`Add ${sharedActions.id}`}
           </button>
         </div>}
     </>
   )
 }
 
-export { UsersListToolbar }
+export { CommonToolbar }
