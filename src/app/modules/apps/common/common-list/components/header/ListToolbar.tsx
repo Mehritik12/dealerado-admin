@@ -44,6 +44,7 @@ const CommonToolbar = () => {
         || (sharedActions.id === TYPE.ADMIN)
         || sharedActions.id === TYPE.ORDER
         || sharedActions.id === TYPE.WALLET
+        || sharedActions.id === TYPE.SERVICE
       ) && <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
           <button type='button' className='btn btn-primary' onClick={openAddUserModal}>
             <KTIcon iconName='plus' className='fs-2' />
