@@ -10,7 +10,7 @@ import { orderList } from "./features/order/orderSlice";
 import { vehicleList } from "./features/vehicle/vehicleSlice";
 import { transactionSlice } from "./features/transaction/transactionSlice";
 import { userPermissionSlice } from "./features/userPermission/userPermissionSlice";
-
+import { serviceSlice } from "./features/service/serviceSlice"
 
 const rootReducer = combineReducers({
   userList: userList.reducer,
@@ -18,7 +18,8 @@ const rootReducer = combineReducers({
   sharedActions: sharedSlice.reducer,
   transactions:transactionSlice.reducer,
   bannerList: bannerList.reducer,
-  userPermission:userPermissionSlice.reducer
+  userPermission:userPermissionSlice.reducer,
+  service: serviceSlice.reducer
   // orderList: orderList.reducer,
   // vehicleList: vehicleList.reducer,
 });

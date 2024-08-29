@@ -1,65 +1,80 @@
-import * as React from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { setServiceModalStatus, setFormDetails } from '../../../../redux/features/shared/sharedSlice';
-import { Field, FormikProvider, useFormik } from 'formik';
-import { Form } from 'react-bootstrap';
-import FieldInputText from '../common/InputFeilds/InputTextField';
+import * as React from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setServiceModalStatus,
+  setFormDetails,
+} from "../../../../redux/features/shared/sharedSlice";
+import { Field, FormikProvider, useFormik } from "formik";
+import { Form } from "react-bootstrap";
+import FieldInputText from "../common/InputFeilds/InputTextField";
 import * as Yup from "yup";
-import { addCategory, getCategory, updateCategory } from '../../../../redux/features/category/_categoryAction';
+import { addNewService } from "../../../../redux/features/service/_serviceAction";
+import FieldInputFile from "../common/InputFeilds/InputFile";
 
 function ServiceModal() {
   const dispatch: any = useDispatch();
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
 
-
   const categoryFormValidation = Yup.object().shape({
-    name: Yup.string().trim().required('Field is required'),
-    description: Yup.string().trim().required('Field is required'),
-    image: Yup.string().trim().required('Field is required'),
+    name: Yup.string().trim().required("Field is required"),
+    description: Yup.string().trim().required("Field is required"),
   });
 
-
   const formValues = {
-    name: sharedActions.formDetails.name || '',
-    description: sharedActions.formDetails.description || '',
-    image: sharedActions.formDetails.description||"",
+    name: sharedActions.formDetails.name || "",
+    description: sharedActions.formDetails.description || "",
+    image: sharedActions.formDetails.description || "imageSrc",
   };
 
   const categoryFormik = useFormik({
     initialValues: formValues,
     validationSchema: categoryFormValidation,
     onSubmit: (values: any) => {
-      if (sharedActions.formDetails._id) {
-        dispatch(updateCategory({ ...values, id: sharedActions.formDetails._id }))
-      } else {
-        dispatch(addCategory(values))
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("description", values.description);
+      if (values.image) {
+        formData.append("image", values.image);
       }
-      dispatch(setServiceModalStatus(false))
-      dispatch(setFormDetails({}))
-      setTimeout(() => {
-        dispatch(getCategory({ page: 1, limit: 10 }));
-      }, 100);
-    },      
+      dispatch(addNewService(formData));
+    },
   });
 
   const closeModal = () => {
-    dispatch(setServiceModalStatus(false))
-    dispatch(setFormDetails({}))
-  }
+    dispatch(setServiceModalStatus(false));
+    dispatch(setFormDetails({}));
+  };
 
   return (
     <>
-
-      <Modal show={sharedActions.serviceModal} onHide={closeModal} animation={true}>
+      <Modal
+        show={sharedActions.serviceModal}
+        onHide={closeModal}
+        animation={true}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>{!sharedActions.formDetails._id ? 'Add' : 'Update'} Service</Modal.Title>
+          <Modal.Title>
+            {!sharedActions.formDetails._id ? "Add" : "Update"} Service
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>  
+        <Modal.Body>
           <FormikProvider value={categoryFormik}>
             <Form onSubmit={categoryFormik.handleSubmit}>
               <div className="row">
+                <div className="col-sm-12 mb-6">
+                  <Form.Group>
+                    <Field
+                      name="name"
+                      validate={categoryFormValidation}
+                      type="text"
+                      label="Service"
+                      component={FieldInputText}
+                    />
+                  </Form.Group>
+                </div>
+
                 <div className="col-sm-12 mb-6">
                   <Form.Group>
                     <Field
@@ -71,25 +86,21 @@ function ServiceModal() {
                     />
                   </Form.Group>
                 </div>
-                <div className="col-sm-6">
-                  <Form.Group>
-
-                  </Form.Group>
+                <div className="col-sm-12 mb-6">
+                  <div className="col-sm-12 mb-6">
+                    <Form.Group>
+                      <label htmlFor="image">Image</label>
+                      <Field name="image" component={FieldInputFile} />
+                    </Form.Group>
+                  </div>
                 </div>
-
-
               </div>
-              <Button
-                type="submit"
-                className="primaryBtn w-100 active"
-              >
-                {!sharedActions.formDetails._id ? 'Add' : 'Update'}
+              <Button type="submit" className="primaryBtn w-100 active">
+                {!sharedActions.formDetails._id ? "Add" : "Update"}
               </Button>
             </Form>
           </FormikProvider>
-
         </Modal.Body>
-
       </Modal>
     </>
   );

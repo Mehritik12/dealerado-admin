@@ -9,15 +9,17 @@ import { Pagination } from "../common/common-list/components/pagination/Paginati
 import { setId } from "../../../../redux/features/shared/sharedSlice";
 import { ServiceModal } from "./ServiceModal";
 import { TYPE } from "../../../../utils/const";
+import { getServices } from "../../../../redux/features/service/_serviceAction";
 
 const CategoryList = () => {
   const dispatch: any = useDispatch();
-  const data: any = useSelector((state: any) => state.categoryList?.data) || [];
+  const data: any = useSelector((state: any ) => state.service?.data) || []; 
   const { totalRecord } = useSelector((state: any) => state.categoryList);
   const sharedActions = useSelector((state: any) => state.sharedActions);
 
   useEffect(() => {
     dispatch(setId(TYPE.SERVICE))
+    dispatch(getServices({}))
     // dispatch(getCategory({ page: 1, limit: 10 }));
   }, [dispatch]);
 
