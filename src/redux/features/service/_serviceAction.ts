@@ -14,6 +14,8 @@ export const addNewService = createAsyncThunk(
       notify(data.responseMessage, 'success')
       return data;
     } catch (error: any) {
+      const message = error.response.data.responseMessage || "Something went wrong"
+      notify(message, 'error')
       return rejectWithValue(error.message);
     }
   }
