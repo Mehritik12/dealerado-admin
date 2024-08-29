@@ -21,8 +21,6 @@ export const getUsers = createAsyncThunk(
       data.limit = limit;
       return data;
     } catch (error: any) {
-      const message = error.response?.data?.responseMessage || "";
-      notify(message, 'error')
       return rejectWithValue(error.message);
     }
   }

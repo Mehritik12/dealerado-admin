@@ -1,4 +1,5 @@
 import { jwtDecode } from "jwt-decode"
+import { notify } from "../../../../utils/shared"
 
 const AUTH_LOCAL_STORAGE_KEY = 'kt-auth-react-v'
 const getAuth = (): any | undefined => {
@@ -19,13 +20,13 @@ const getAuth = (): any | undefined => {
   }
 }
 
-export const getRole=()=>{
+export const getRole = () => {
   try {
     const auth = getAuth();
     if (auth && auth?.accessToken) {
-      let decoded:any= jwtDecode(auth.accessToken);
-      return decoded?.role||'user';
-    }else{
+      let decoded: any = jwtDecode(auth.accessToken);
+      return decoded?.role || 'user';
+    } else {
       return 'user';
     }
   } catch (error) {
@@ -60,9 +61,8 @@ export function setupAxios(axios: any) {
   axios.defaults.headers.Accept = 'application/json';
 
   axios.interceptors.request.use(
-    (config: {headers: {Authorization: string}}) => {
+    (config: { headers: { Authorization: string } }) => {
       const auth = getAuth();
-      console.log("auth setup",auth)
       if (auth && auth?.accessToken) {
         config.headers.Authorization = `${auth?.accessToken}`
       }
@@ -76,17 +76,20 @@ export function setupAxios(axios: any) {
       return response;
     },
     async (error) => {
+      if (error.code === "ERR_NETWORK") {
+        notify('Network issue please check your network connection', 'error')
+      }
       const { config, response: { status } } = error;
       const originalRequest = config;
 
       if ((status === 403 || status === 401) && !originalRequest._retry) {
         originalRequest._retry = true;
         localStorage.clear();
-        window.location.href= '/auth';
+        window.location.href = '/auth';
       }
       return Promise.reject(error);
     }
   );
 }
 
-export {getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY}
+export { getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY }

@@ -3,15 +3,15 @@ import { CommonTable } from "../common/common-list/table/Table";
 import { KTCard } from "../../../../_metronic/helpers";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { servicesColumns } from "../common/common-list/table/columns/_servicesColumns";
+import { subServicesColumns } from "../common/common-list/table/columns/_subServicesColumns";
 import { getCategory } from "../../../../redux/features/category/_categoryAction";
 import { Pagination } from "../common/common-list/components/pagination/Pagination";
 import { setId } from "../../../../redux/features/shared/sharedSlice";
-import { ServiceModal } from "./ServiceModal";
+import { SubServiceModal } from "./SubServiceModal";
 import { TYPE } from "../../../../utils/const";
 import { getServices } from "../../../../redux/features/service/_serviceAction";
 
-const ServiceList = () => {
+const SubServiceList = () => {
   const dispatch: any = useDispatch();
   const data: any = useSelector((state: any ) => state.service?.data) || []; 
   const { totalRecord } = useSelector((state: any) => state.categoryList);
@@ -31,8 +31,8 @@ const ServiceList = () => {
     <>
       <KTCard>
         <CommonHeader />
-        <CommonTable data={data} columns={servicesColumns} />
-        {sharedActions.serviceModal && <ServiceModal/>}
+        <CommonTable data={data} columns={subServicesColumns} />
+        {sharedActions.serviceModal && <SubServiceModal/>}
         {totalRecord > 10 && (
           <Pagination totalRecord={totalRecord} handleClick={handleClick} />
         )}
@@ -41,4 +41,4 @@ const ServiceList = () => {
   );
 };
 
-export { ServiceList };
+export { SubServiceList };

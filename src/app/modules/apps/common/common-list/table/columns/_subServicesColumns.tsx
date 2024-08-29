@@ -2,14 +2,12 @@
 import { Column } from 'react-table'
 import { TitleCell } from './TitleCell'
 import { ImageCell } from './ImageCell'
-import { ActiveCell } from './ActiveCell'
 import { UserCustomHeader } from './CustomHeader'
 import { User } from '../../core/_models'
-import { MappingCell } from './MappingCell'
 import { ActionCell } from './ActionCell'
 
 
-const categoryColumns: ReadonlyArray<Column<User>> = [
+const subServicesColumns: ReadonlyArray<Column<User>> = [
   {
 
     Header: (props) => <UserCustomHeader tableProps={props} title='name' className='min-w-50px' />,
@@ -36,4 +34,4 @@ const categoryColumns: ReadonlyArray<Column<User>> = [
   },
 ]
 
-export { categoryColumns }
+export { subServicesColumns }

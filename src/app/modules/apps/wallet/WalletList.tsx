@@ -14,10 +14,9 @@ const role = 'user';
 const UserList = () => {
   const dispatch: any = useDispatch();
   const data: any = useSelector((state: any) => state.userList?.data);
-  const { totalRecord } = useSelector((state: any) => state.userList);
+  const totalRecord = useSelector((state: any) => state.userList?.totalRecord);
   const sharedActions = useSelector((state: any) => state.sharedActions);
-  const allUserBalance = useSelector((state: any) => state.transactions.allUserBalance.balance)
-
+  const allUserBalance = useSelector((state: any) => state.transactions?.allUserBalance?.balance)
 
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const UserList = () => {
             <div className="col-lg-3 col-md-4 mb-3">
               <div className="blockAmount">
                 <p>Balance</p>
-                <label>{allUserBalance}</label>
+                <label>₹ {allUserBalance?allUserBalance:0}</label>
               </div>
             </div>
             {/* <div className="col-sm-4 mb-3">
