@@ -10,7 +10,7 @@ import { Field, FormikProvider, useFormik } from "formik";
 import { Form } from "react-bootstrap";
 import FieldInputText from "../common/InputFeilds/InputTextField";
 import * as Yup from "yup";
-import { addNewService } from "../../../../redux/features/service/_serviceAction";
+import { addNewService, updateService } from "../../../../redux/features/service/_serviceAction";
 import FieldInputFile from "../common/InputFeilds/InputFile";
 
 function ServiceModal() {
@@ -25,7 +25,7 @@ function ServiceModal() {
   const formValues = {
     name: sharedActions.formDetails.name || "",
     description: sharedActions.formDetails.description || "",
-    image: sharedActions.formDetails.description || "imageSrc",
+    image: sharedActions.formDetails.image || "",
   };
 
   const categoryFormik = useFormik({
@@ -33,12 +33,21 @@ function ServiceModal() {
     validationSchema: categoryFormValidation,
     onSubmit: (values: any) => {
       const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("description", values.description);
-      if (values.image) {
-        formData.append("image", values.image);
+      if (sharedActions.formDetails._id) {
+        formData.append("name", values.name);
+        formData.append("description", values.description);
+        if (values.image) {
+          formData.append("image", values.image);
+        }
+        dispatch(updateService({_id:sharedActions.formDetails._id,formData:formData,type:'service',parentId:""}));
+      }else{
+        formData.append("name", values.name);
+        formData.append("description", values.description);
+        if (values.image) {
+          formData.append("image", values.image);
+        }
+        dispatch(addNewService(formData));
       }
-      dispatch(addNewService(formData));
     },
   });
 

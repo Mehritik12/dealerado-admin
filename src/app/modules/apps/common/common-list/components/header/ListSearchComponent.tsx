@@ -20,6 +20,7 @@ const CommonSearchComponent = () => {
         || sharedActions.id === TYPE.USER
         || (sharedActions.id === TYPE.ADMIN)
         || sharedActions.id === TYPE.ORDER
+        || sharedActions.id === TYPE.WALLET
       ) && <div className='card-title'>
           <div className='d-flex align-items-center position-relative my-1'>
             <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />

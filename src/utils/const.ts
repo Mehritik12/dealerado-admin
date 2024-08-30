@@ -10,7 +10,8 @@ export const TYPE = {
   ORDER: 'Order',
   VEHICLE: 'Vehicle',
   SERVICE:'Service',
-  WALLET:'Wallet'
+  WALLET:'Wallet',
+  SUBSERVICE:"Subservice"
 }
 
 export const capitalizeFirstLetter = (string: string) => {

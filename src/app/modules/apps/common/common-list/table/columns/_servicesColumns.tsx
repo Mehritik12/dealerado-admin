@@ -28,7 +28,7 @@ const servicesColumns: ReadonlyArray<Column<User>> = [
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='sub-service' className='min-w-50px' />,
     id: 'sub-service',
-    Cell: ({ ...props }) => <ViewServiceCell userObj={props.data[props.row.index].description} />,
+    Cell: ({ ...props }) => <ViewServiceCell userObj={props.data[props.row.index]} />,
   },
   {
     Header: (props) => (

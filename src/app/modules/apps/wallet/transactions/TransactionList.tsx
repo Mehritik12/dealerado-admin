@@ -23,7 +23,7 @@ const TransactionList = () => {
       dispatch(getTransactions({ userId: sharedActions.formDetails._id, page: 1, limit: 10 }));
       dispatch(getUserBalance({ userId: sharedActions.formDetails._id }))
     }
-  }, []);
+  }, [dispatch]);
 
   const handleClick = (page: number) => {
     dispatch(getTransactions({ userId: sharedActions.formDetails._id, page: page, limit: 10 }));

@@ -13,6 +13,9 @@ export const commonSwtichCases = (id: any, searchValue: any, dispatch: any) => {
         case TYPE.USER:
             dispatch(getUsers({ search: searchValue,role:'user'}))
             break;
+            case TYPE.WALLET:
+                dispatch(getUsers({ search: searchValue,role:'user'}))
+                break;
         default:
     }
 }

@@ -25,6 +25,7 @@ button.btn.btn-primary {
     background: #2A394A;
     .logo_img {
       filter: none;
+      width: 110px;
     }
   }
   .symbol span{
@@ -255,5 +256,18 @@ button.eyeBtn {
       color: #252f4a !important;
       font-weight: 700 !important;
     }
+  }
+}
+@media (min-width: 992px) {
+  .header .header-brand {
+      height: 74px !important;
+  }
+  .aside {
+        top: 74px !important;
+        .aside-toolbar {
+          .aside-user  {
+            border: none !important;
+          }
+        }
   }
 }

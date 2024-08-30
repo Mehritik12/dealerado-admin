@@ -6,6 +6,7 @@ import {
   setServiceModalStatus,
   setFormDetails,
   setUserModalStatus,
+  setSubServiceModalStatus,
 } from "../../../../../../../redux/features/shared/sharedSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { conFirmMessage } from "../../../../../../../utils/shared";
@@ -15,16 +16,18 @@ import {
 } from "../../../../../../../redux/features/category/_categoryAction";
 import { Dropdown } from "react-bootstrap";
 import ThreeDotsIcon from "../../../../../../../_metronic/assets/logo/ThreeDotsIcon";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { deleteBanner, getBanner } from "../../../../../../../redux/features/banner/_bannerAction";
 import { deleteUser } from "../../../../../../../redux/features/user/_userAction";
 import { TYPE } from "../../../../../../../utils/const";
+import { deleteService } from "../../../../../../../redux/features/service/_serviceAction";
 
 type Props = {
   user: any;
 };
 
 const ActionCell: FC<Props> = ({ user }) => {
+  const { id } = useParams();
   const dispatch: any = useDispatch();
   const sharedActions = useSelector((state: any) => state.sharedActions);
 
@@ -43,6 +46,9 @@ const ActionCell: FC<Props> = ({ user }) => {
         case TYPE.ADMIN:
           dispatch(setAdminModalStatus(true));
           break;   
+          case TYPE.SUBSERVICE:
+            dispatch(setSubServiceModalStatus(true))
+            break;
       default:
     }
   };
@@ -67,6 +73,12 @@ const ActionCell: FC<Props> = ({ user }) => {
         }
         else if (sharedActions.id === TYPE.USER) {
           dispatch(deleteUser({ id: itemId }));
+        }
+        else if (sharedActions.id === TYPE.SERVICE) {
+          dispatch(deleteService({ _id: itemId,type:'service' }));
+        }
+        else if (sharedActions.id === TYPE.SUBSERVICE) {
+          dispatch(deleteService({ _id: itemId,type:'subService',parentId:id }));
         }
       }
     });

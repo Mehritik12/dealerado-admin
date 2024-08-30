@@ -31,7 +31,7 @@ export const addMoney = createAsyncThunk(
       notify(data.responseMessage, 'success')
       dispatch(getTransactions({ page: 1, limit: 10 ,userId:values.userId}))
       dispatch(setAddMoneyModalStatus(false));
-      dispatch(getAllUserBalance({}))
+      dispatch(getUserBalance({userId:values.userId}))
       return data;
     } catch (error: any) {
       const message = error.response.data.responseMessage || ""

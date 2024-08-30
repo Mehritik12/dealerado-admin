@@ -9,19 +9,23 @@ import { Pagination } from "../common/common-list/components/pagination/Paginati
 import { setId } from "../../../../redux/features/shared/sharedSlice";
 import { SubServiceModal } from "./SubServiceModal";
 import { TYPE } from "../../../../utils/const";
-import { getServices } from "../../../../redux/features/service/_serviceAction";
+import { getServices, getSubServices } from "../../../../redux/features/service/_serviceAction";
+import { useParams } from "react-router-dom";
 
 const SubServiceList = () => {
+  const { id } = useParams()
   const dispatch: any = useDispatch();
   const data: any = useSelector((state: any ) => state.service?.data) || []; 
   const { totalRecord } = useSelector((state: any) => state.categoryList);
   const sharedActions = useSelector((state: any) => state.sharedActions);
 
+
   useEffect(() => {
-    dispatch(setId(TYPE.SERVICE))
-    dispatch(getServices({}))
-    // dispatch(getCategory({ page: 1, limit: 10 }));
-  }, [dispatch]);
+    dispatch(setId(TYPE.SUBSERVICE))
+    if(id){
+      dispatch(getSubServices({_id:id}))
+    }
+  }, [dispatch,id]);
 
   const handleClick = (page: number) => {
     dispatch(getCategory({ page: page, limit: 10 }));
@@ -32,7 +36,7 @@ const SubServiceList = () => {
       <KTCard>
         <CommonHeader />
         <CommonTable data={data} columns={subServicesColumns} />
-        {sharedActions.serviceModal && <SubServiceModal/>}
+        {sharedActions.subServiceModal && <SubServiceModal/>}
         {totalRecord > 10 && (
           <Pagination totalRecord={totalRecord} handleClick={handleClick} />
         )}

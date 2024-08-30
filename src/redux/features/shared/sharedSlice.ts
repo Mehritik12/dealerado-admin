@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState: any = {
   id: '',
   serviceModal: false,
+  subServiceModal:false,
   userModal: false,
   orderModal: false,
   vehicleModal: false,
@@ -27,6 +28,9 @@ export const sharedSlice = createSlice({
     },
     setServiceModalStatus: (state, { payload }) => {
       state.serviceModal = payload
+    },
+    setSubServiceModalStatus: (state, { payload }) => {
+      state.subServiceModal = payload
     },
     setBannerModalStatus: (state, { payload }) => {
       state.bannerModal = payload
@@ -59,6 +63,7 @@ export const {
   setId,
   setFormDetails,
   setServiceModalStatus,
+  setSubServiceModalStatus,
   setUserModalStatus,
   setBannerModalStatus,
   setOrderModalStatus,

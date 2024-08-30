@@ -11,11 +11,12 @@ import { REQUIRED } from "../../../../../utils/const";
 import { addMoney } from "../../../../../redux/features/transaction/_transactionAction";
 import FieldSelectInput from "../../common/InputFeilds/InputSelectField";
 import FieldInputTextarea from "../../common/InputFeilds/InputTextareaField";
+import { useParams } from "react-router-dom";
 
 function TransactionModal() {
   const dispatch: any = useDispatch();
   const sharedActions = useSelector((state: any) => state.sharedActions);
-  const userList = useSelector((state: any) => state?.userList?.data) || [];
+  const {id} = useParams();
 
   const userFormValidation = Yup.object().shape({
     userId: Yup.string().required(REQUIRED),
@@ -26,7 +27,7 @@ function TransactionModal() {
 
   const formValues = {
     amount: 100,
-    userId: "",
+    userId: id,
     description: "",
     type: ''
   };
@@ -35,20 +36,17 @@ function TransactionModal() {
     initialValues: formValues,
     validationSchema: userFormValidation,
     onSubmit: (values: any, { resetForm }) => {
-      dispatch(addMoney(values));
+      console.log(values)
+      if(id){
+        values.userId = id;
+        dispatch(addMoney(values));
+      }
     },
   });
 
   const closeModal = () => {
     dispatch(setAddMoneyModalStatus(false));
   };
-
-  // Map the user list to options
-  const userOptions = userList.map((user) => ({
-    label: user.name,
-    value: user._id,
-    email:user.email
-  }));
 
   return (
     <>
@@ -60,18 +58,6 @@ function TransactionModal() {
           <FormikProvider value={walletFormik}>
             <Form onSubmit={walletFormik.handleSubmit}>
               <div className="row">
-                <div className="col-sm-12">
-                  <Form.Group>
-                    <Field
-                      name="userId"
-                      validate={userFormValidation}
-                      type="text"
-                      label="Select User"
-                      options={userOptions}
-                      component={FieldSelectInput}
-                    />
-                  </Form.Group>
-                </div>
                 <div className="col-sm-12">
                   <Form.Group>
                     <Field
