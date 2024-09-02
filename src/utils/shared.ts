@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { getCategory } from "../redux/features/category/_categoryAction";
 import { getUsers } from "../redux/features/user/_userAction";
 import { TYPE } from "./const";
+import { getBanner } from "../redux/features/banner/_bannerAction";
 
 export const commonSwtichCases = (id: any, searchValue: any, dispatch: any) => {
     switch (id) {
@@ -16,6 +17,9 @@ export const commonSwtichCases = (id: any, searchValue: any, dispatch: any) => {
             case TYPE.WALLET:
                 dispatch(getUsers({ search: searchValue,role:'user'}))
                 break;
+                case TYPE.BANNER:
+                    dispatch(getBanner({ search: searchValue}))
+                    break;
         default:
     }
 }

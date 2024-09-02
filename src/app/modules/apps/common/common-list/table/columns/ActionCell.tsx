@@ -80,6 +80,9 @@ const ActionCell: FC<Props> = ({ user }) => {
         else if (sharedActions.id === TYPE.SUBSERVICE) {
           dispatch(deleteService({ _id: itemId,type:'subService',parentId:id }));
         }
+        else if (sharedActions.id === TYPE.BANNER) {
+          dispatch(deleteBanner({ _id: itemId}));
+        }
       }
     });
   };

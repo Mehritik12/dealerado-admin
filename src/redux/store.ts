@@ -5,7 +5,7 @@ import logger from "redux-logger";
 import { userList } from "./features/user/userSlice";
 import { categoryList } from "./features/category/categorySlice";
 import {sharedSlice} from "./features/shared/sharedSlice"
-import { bannerList } from "./features/banner/bannerSlice";
+import { bannerSlice } from "./features/banner/bannerSlice";
 import { orderList } from "./features/order/orderSlice";
 import { vehicleList } from "./features/vehicle/vehicleSlice";
 import { transactionSlice } from "./features/transaction/transactionSlice";
@@ -17,11 +17,10 @@ const rootReducer = combineReducers({
   categoryList: categoryList.reducer,
   sharedActions: sharedSlice.reducer,
   transactions:transactionSlice.reducer,
-  bannerList: bannerList.reducer,
+  banners: bannerSlice.reducer,
   userPermission:userPermissionSlice.reducer,
   service: serviceSlice.reducer
-  // orderList: orderList.reducer,
-  // vehicleList: vehicleList.reducer,
+  // banner: orderList.reducer,
 });
 
 const persistConfig = {

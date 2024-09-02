@@ -11,7 +11,7 @@ import { bannerColumns } from "../common/common-list/table/columns/_bannerColumn
 
 const BannerList = () => {
   const dispatch: any = useDispatch();
-  const data: any = useSelector((state: any) => state?.bannerList?.data);
+  const data: any = useSelector((state: any) => state?.banners?.data) ||[];
   const totalRecord = useSelector((state: any) => state?.bannerList?.totalRecord);
   const sharedActions = useSelector((state: any) => state?.sharedActions);
 

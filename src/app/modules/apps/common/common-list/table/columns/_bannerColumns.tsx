@@ -16,11 +16,11 @@ const bannerColumns: ReadonlyArray<Column<User>> = [
     id: 'name',
     Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].name} />,
   },
-  {
-    Header: (props) => <UserCustomHeader tableProps={props} title='type' className='min-w-50px' />,
-    id: 'type',
-    Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].type} />,
-  },
+  // {
+  //   Header: (props) => <UserCustomHeader tableProps={props} title='type' className='min-w-50px' />,
+  //   id: 'type',
+  //   Cell: ({ ...props }) => <TitleCell userObj={props.data[props.row.index].type} />,
+  // },
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='image' className='min-75px' />,
     id: 'image',

@@ -7,54 +7,48 @@ import { Field, FormikProvider, useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
 import FieldInputText from '../common/InputFeilds/InputTextField';
 import * as Yup from "yup";
-import { addBanner, getBanner, updateBanner } from '../../../../redux/features/banner/_bannerAction';
-import FieldSelectInput from '../common/InputFeilds/InputSelectField';
+import { addBanner, updateBanner } from '../../../../redux/features/banner/_bannerAction';
+import { REQUIRED } from '../../../../utils/const';
+import FieldInputFile from '../common/InputFeilds/InputFile';
 
 function BannerModal() {
-  const dispatch: any = useDispatch();
-  const sharedActions: any = useSelector((state: any) => state.sharedActions);
-
+  const dispatch:any = useDispatch();
+  const sharedActions = useSelector((state:any) => state.sharedActions);
 
   const bannerFormValidation = Yup.object().shape({
-    name: Yup.string().trim().required('Field is required'),
-    type: Yup.string().trim().required('Field is required'),
-    image: Yup.string().trim().required('Field is required'),
+    name: Yup.string().trim().required(REQUIRED),
+    image: Yup.mixed().required(REQUIRED),
   });
 
-
   const formValues = {
-    name: sharedActions.formDetails.name || '',
-    type: sharedActions.formDetails.type || '',
-    image: sharedActions.formDetails.image || 'https://s3.ap-south-1.amazonaws.com/dealeradokstorage/1718864818079.png',
+    name: sharedActions.formDetails.name || "",
+    image: sharedActions.formDetails.image || "",
   };
 
   const bannerFormik = useFormik({
     initialValues: formValues,
     validationSchema: bannerFormValidation,
-    onSubmit: (values: any) => {
-      if (sharedActions.formDetails._id) {
-        dispatch(updateBanner({ ...values, id: sharedActions.formDetails._id }))
-      } else {
-        dispatch(addBanner(values))
+    onSubmit: (values) => {
+      const formData = new FormData();
+      formData.append("name", values.name);
+      if (values.image && values.image instanceof File) {
+        formData.append("image", values.image);
       }
-      dispatch(setBannerModalStatus(false))
-      dispatch(setFormDetails({}))
-      setTimeout(() => {
-        dispatch(getBanner({ page: 1, limit: 10 }));
-      }, 100);
+      if (sharedActions.formDetails._id) {
+        dispatch(updateBanner({formData:formData, _id: sharedActions.formDetails._id }));
+      } else {
+        dispatch(addBanner(formData));
+      }
     },
   });
 
   const closeModal = () => {
-    dispatch(setBannerModalStatus(false))
-    dispatch(setFormDetails({}))
+    dispatch(setBannerModalStatus(false));
+    dispatch(setFormDetails({}));
   }
-
-
 
   return (
     <>
-
       <Modal show={sharedActions.bannerModal} onHide={closeModal} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>{!sharedActions.formDetails._id ? 'Add' : 'Update'} Banner</Modal.Title>
@@ -64,40 +58,21 @@ function BannerModal() {
             <Form onSubmit={bannerFormik.handleSubmit}>
               <div className="row">
                 <div className="col-sm-12 mb-6">
-                
                   <Form.Group>
                     <Field
                       name="name"
-                      validate={bannerFormValidation}
                       type="text"
-                      label="Name"
+                      label="Title"
                       component={FieldInputText}
                     />
                   </Form.Group>
                 </div>
                 <div className="col-sm-12 mb-6">
-                  <Form.Group>
-                    <Field
-                      name="type"
-                      validate={bannerFormValidation}
-                      type="text"
-                      label="Type"
-                      options={['TOP', 'MIDDLE', 'BOTTOM']} 
-                      component={FieldSelectInput}  
-                    /> 
-                  </Form.Group>
                   <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label> Image</Form.Label>
-                  <Form.Control type="file"
-            
-                  accept="image/*" />
-                </Form.Group>
+                    <label htmlFor="image">Image</label>
+                    <Field name="image" component={FieldInputFile} />
+                  </Form.Group>
                 </div>
-                <div className="col-sm-6">
-              
-                </div>
-
-
               </div>
               <Button
                 type="submit"
@@ -107,9 +82,7 @@ function BannerModal() {
               </Button>
             </Form>
           </FormikProvider>
-
         </Modal.Body>
-
       </Modal>
     </>
   );

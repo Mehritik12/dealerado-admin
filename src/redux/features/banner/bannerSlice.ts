@@ -5,13 +5,13 @@ const initialState: any = {
   data: [],
   isLoading: false,
   isSuccess: false,
-  responseCode: null,
-  responseMessage: '',
   totalRecord: 0,
+  page:1,
+  limit:10
 };
 
-export const bannerList = createSlice({
-  name: "bannerList",
+export const bannerSlice = createSlice({
+  name: "banner",
   initialState: initialState,
   reducers: {},
 

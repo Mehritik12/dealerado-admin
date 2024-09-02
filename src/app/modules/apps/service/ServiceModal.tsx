@@ -17,7 +17,7 @@ function ServiceModal() {
   const dispatch: any = useDispatch();
   const sharedActions: any = useSelector((state: any) => state.sharedActions);
 
-  const categoryFormValidation = Yup.object().shape({
+  const formValidation = Yup.object().shape({
     name: Yup.string().trim().required("Field is required"),
     description: Yup.string().trim().required("Field is required"),
   });
@@ -30,7 +30,7 @@ function ServiceModal() {
 
   const categoryFormik = useFormik({
     initialValues: formValues,
-    validationSchema: categoryFormValidation,
+    validationSchema: formValidation,
     onSubmit: (values: any) => {
       const formData = new FormData();
       if (sharedActions.formDetails._id) {
@@ -76,7 +76,7 @@ function ServiceModal() {
                   <Form.Group>
                     <Field
                       name="name"
-                      validate={categoryFormValidation}
+                      validate={formValidation}
                       type="text"
                       label="Service"
                       component={FieldInputText}
@@ -88,7 +88,7 @@ function ServiceModal() {
                   <Form.Group>
                     <Field
                       name="description"
-                      validate={categoryFormValidation}
+                      validate={formValidation}
                       type="text"
                       label="Description"
                       component={FieldInputText}

@@ -21,12 +21,12 @@ function TransactionModal() {
   const userFormValidation = Yup.object().shape({
     userId: Yup.string().required(REQUIRED),
     type: Yup.string().required(REQUIRED),
-    amount: Yup.number().required(REQUIRED).min(100, 'Amount should be greater than 100'),
+    amount: Yup.number().required(REQUIRED).min(1, 'Amount should be greater than 0'),
     description: Yup.string().max(60,'Remark should not be greter than 60').required(REQUIRED)
   });
 
   const formValues = {
-    amount: 100,
+    amount:0,
     userId: id,
     description: "",
     type: ''

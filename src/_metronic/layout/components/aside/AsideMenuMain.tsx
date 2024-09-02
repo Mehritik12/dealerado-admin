@@ -23,7 +23,7 @@ export function AsideMenuMain() {
       {/* <AsideMenuItem to="/dashboard" icon={<PartnersIcon />} title="Dashboard" /> */}
       <AsideMenuItem to="/users" icon={<PartnersIcon />} title="Users" type = 'User' />
       {/* <AsideMenuItem to="/orders" icon={<OrderIcon />} title="Orders"  type = 'Order'/> */}
-      {/* <AsideMenuItem to="/banner" icon={<CategoryIcon/>} title="Banner" /> */}
+      <AsideMenuItem to="/banner" icon={<CategoryIcon/>} title="Banner" type="Banner" />
       <AsideMenuItem to="/wallet" icon={<CategoryIcon/>} title="Wallet Management" type = 'Money' />
       <AsideMenuItem to="/service" icon={<CategoryIcon/>} title="Service" type='Service'/>
       {role === 'sadmin' && <AsideMenuItem to="/admin" icon={<AdminIcons />} title="Employees" type = 'Employee'/>}
